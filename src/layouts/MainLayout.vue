@@ -7,26 +7,44 @@
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" alt="Hier wäre ein Bild">
           </q-avatar>
-          Title
+          Filmtracker
         </q-toolbar-title>
-        <q-btn unelevated rounded color="secondary" label="Unelevated Rounded" />
+        <q-btn unelevated rounded color="secondary" label="Login" />
         <q-btn dense flat round icon="menu" @click="right = !right" />
 
       </q-toolbar>
 
       <q-tabs align="left">
-        <q-route-tab to="/home" label="Home" />
-        <q-route-tab to="/camera" label="Camera" />
-        <q-route-tab to="/page3" label="Page Three" />
+        <q-route-tab to="/home" label="Startseite" />
+        <q-route-tab to="/camera" label="Suche" />
+        <q-route-tab to="/page3" label="Eigene Liste" />
       </q-tabs>
     </q-header>
 
     <q-drawer show-if-above v-model="right" side="right" elevated>
       <!-- drawer content -->
+      <div>
+        <q-list>
+
+          <q-item clickable v-ripple>
+            <q-item-section>Mein Profil</q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple>
+            <q-item-section>Wunschliste</q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple>
+            <q-item-section>Einstellungen</q-item-section>
+          </q-item>
+
+        </q-list>
+      </div>
     </q-drawer>
 
     <q-page-container>
       <router-view />
+
     </q-page-container>
 
   </q-layout>
