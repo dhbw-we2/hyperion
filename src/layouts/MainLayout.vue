@@ -1,14 +1,23 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
+
     <q-header elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar>
+
         <q-toolbar-title>
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" alt="Hier wäre ein Bild">
           </q-avatar>
           Title
         </q-toolbar-title>
+        <q-input dark v-model="search" filled type="search" color="white">
+          <template v-slot:append>
+            <q-btn class="btn">
+            <q-icon name="search" />
+            </q-btn>
+          </template>
+        </q-input>
         <q-btn unelevated rounded color="secondary" label="Unelevated Rounded" />
         <q-btn dense flat round icon="menu" @click="right = !right" />
 
