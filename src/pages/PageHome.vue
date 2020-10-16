@@ -1,6 +1,6 @@
 <template>
   <q-page class="float-left">
-
+<div style="min-width: 500px">
     <q-list bordered separator>
       <q-item clickable v-ripple>
         <q-item-section>
@@ -30,7 +30,7 @@
         </q-item-section>
       </q-item>
     </q-list>
-
+</div>
 
 
   </q-page>
