@@ -16,7 +16,6 @@
             </q-btn>
           </template>
         </q-input>
-        <q-btn unelevated rounded color="secondary" label="Unelevated Rounded" />
         <q-btn unelevated rounded color="secondary" label="Login" />
         <q-btn dense flat round icon="menu" @click="right = !right" />
 
