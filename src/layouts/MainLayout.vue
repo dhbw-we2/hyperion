@@ -19,11 +19,11 @@
         <div class="absolute-center" style="min-width: 35%">
         <q-input dark v-model="search" filled type="search" color="white" >
           <template v-slot:after>
-            <q-btn round dense flat icon="search" />
+            <q-btn round dense flat icon="search"/>
           </template>
         </q-input>
         </div>
-        <q-btn unelevated rounded color="secondary" label="Login" />
+        <q-btn dense color="secondary" icon-right="fas fa-sign-in-alt" label="Login" />
         <q-btn dense flat round icon="menu" @click="right = !right" />
 
       </q-toolbar>
