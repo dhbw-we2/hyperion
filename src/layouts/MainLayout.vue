@@ -31,15 +31,16 @@
       <q-tabs align="left">
         <q-route-tab to="/home" label="Startseite" />
         <q-route-tab to="/camera" label="Suche" />
-        <q-route-tab to="/page3" label="Eigene Liste" />
+        <q-route-tab to="/trackerlist" label="Eigene Liste" />
       </q-tabs>
     </q-header>
 
     <q-drawer show-if-above v-model="right" side="right" elevated>
       <!-- drawer content -->
-      <div>
-        <q-list>
 
+      <div>
+
+        <q-list>
           <q-item clickable v-ripple>
             <q-item-section>Mein Profil</q-item-section>
           </q-item>

@@ -1,11 +1,15 @@
 <template>
   <q-page class="flex-center">
-    Camera Page
+    Trackerlist Page
   </q-page>
 </template>
 
 <script>
 export default {
-  name: 'PageCamera'
+name: "trackerlist"
 }
 </script>
+
+<style scoped>
+
+</style>
