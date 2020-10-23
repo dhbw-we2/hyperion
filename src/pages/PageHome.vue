@@ -40,6 +40,7 @@
         <div class="col">
           Poster 6
           <q-img src="https://images-na.ssl-images-amazon.com/images/I/5184-DjkaVL._AC_.jpg" class="rounded-borders"> </q-img>
+          <q-btn dense flat round icon="menu" @click="loadData" />
         </div>
 
         </div>
@@ -54,7 +55,29 @@
 </template>
 
 <script>
+
 export default {
-  name: 'PageHome'
+  name: 'PageHome',
+  methods: {
+    loadData() {
+      let config;
+      config = require('../../config.json')
+      let api_base_url;
+      api_base_url = 'https://api.themoviedb.org/3/search/'
+      let api_key;
+      api_key = config.api_key
+      this.$axios.get(`${api_base_url}movie?api_key=${api_key}&query=vom+winde+verweht&language=de`)
+        .then((response) => {
+          this.data = response.data
+          console.log(this.data)
+          console.log(this.data.results[0].original_title)
+
+        })
+        .catch(() => {
+          console.log("Failed")
+
+        })
+    }
+  }
 }
 </script>

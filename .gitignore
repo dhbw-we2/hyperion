@@ -34,3 +34,4 @@ yarn-error.log*
 
 # Secrets
 serviceAccountKey.json
+config.json
