@@ -10,6 +10,21 @@
 
 <script>
 export default {
+  mounted() {
+    console.log("Route Changed")
+    this.search = this.$route.params.search;
+    console.log("Parameter " + this.search)
+    this.loadData(this.search)
+  },
+  watch:{
+    $route (to, from){
+      this.show = false;
+      console.log("Route Changed")
+      this.search = this.$route.params.search;
+      console.log("Parameter " + this.search)
+      this.loadData(this.search)
+    }
+  },
   name: "trackerlist",
   data: function() {
     return {
@@ -18,14 +33,14 @@ export default {
   },
 
   methods: {
-    loadData() {
+    loadData(searchtext) {
       let config;
       config = require('../../config.json')
       let api_base_url;
       api_base_url = 'https://api.themoviedb.org/3/search/'
       let api_key;
       api_key = config.api_key_movie
-      this.$axios.get(`${api_base_url}movie?api_key=${api_key}&query=star+wars&language=de`)
+      this.$axios.get(`${api_base_url}movie?api_key=${api_key}&query=${searchtext}&language=de`)
         .then((response) => {
           this.data = response.data
           console.log(this.data)

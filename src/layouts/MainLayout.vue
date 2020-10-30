@@ -19,7 +19,7 @@
         <div class="absolute-center" style="min-width: 35%">
         <q-input dark v-model="search" filled type="search" color="white" >
           <template v-slot:after>
-            <q-btn round dense flat icon="search"/>
+            <q-btn round dense flat icon="search" @click="searchBtnClick" type="submit"/>
           </template>
         </q-input>
         </div>
@@ -68,9 +68,18 @@
 <script>
 export default {
   data () {
+    search: ''
     return {
       right: false
     }
+  },
+  methods: {
+    searchBtnClick() {
+      console.log(this.search);
+      let test;
+      test = this.search;
+      this.$router.replace({ name: "searchresult", params: {search: test}}).catch(err => {})
+  }
   }
 }
 </script>
