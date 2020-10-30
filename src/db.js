@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 let config;
-config = require('config.json')
+config = require('../config.json')
 
 const firebaseConfig = {
   apiKey: config.apiKey,
