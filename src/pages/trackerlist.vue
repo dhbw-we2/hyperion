@@ -24,7 +24,7 @@ export default {
       let api_base_url;
       api_base_url = 'https://api.themoviedb.org/3/search/'
       let api_key;
-      api_key = config.api_key
+      api_key = config.api_key_movie
       this.$axios.get(`${api_base_url}movie?api_key=${api_key}&query=star+wars&language=de`)
         .then((response) => {
           this.data = response.data
