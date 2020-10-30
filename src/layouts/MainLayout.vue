@@ -23,7 +23,7 @@
           </template>
         </q-input>
         </div>
-        <q-btn dense color="secondary" icon-right="fas fa-sign-in-alt" label="Login" />
+        <q-btn dense color="secondary" icon-right="fas fa-sign-in-alt" label="Login" to="/login"/>
         <q-btn dense flat round icon="menu" @click="right = !right" />
 
       </q-toolbar>
