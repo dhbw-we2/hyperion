@@ -3,9 +3,11 @@
     Trackerlist Page
     <q-btn dense flat round icon="menu" @click="loadData" />
     <ul>
-      <li v-for="title in movieArray">{{ title.original_title }}</li>
+      <li v-for="title in movieArray">{{ title.original_title + "und" + title.id }}</li>
     </ul>
+
   </q-page>
+
 </template>
 
 <script>
