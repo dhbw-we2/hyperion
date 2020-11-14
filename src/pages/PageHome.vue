@@ -7,7 +7,7 @@
 
         <div class="col" >
           Poster 1
-          <q-img  @click="$router.push({ path: 'camera' })" src="https://images-na.ssl-images-amazon.com/images/I/71Zy0yoxrdL._AC_SL1023_.jpg" class="rounded-borders"> </q-img>
+          <q-img  @click="$router.push({ path: 'camera' })" src="https://images-na.ssl-images-amazon.com/images/I/71Zy0yoxrdL._AC_SL1023_.jpg" class="hover rounded-borders"> </q-img>
         </div>
 
         <div class="col">
@@ -67,3 +67,9 @@ export default {
 
 }
 </script>
+
+<style>
+.hover {
+  cursor: pointer;
+}
+</style>

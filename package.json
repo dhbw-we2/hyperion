@@ -7,19 +7,22 @@
   "author": "Danny Connell",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "dev": "cross-env QENV=development quasar dev",
+    "test-dev": "QENV=test quasar dev",
+    "combined": "QENV=development+test quasar dev",
+    "build": "QENV=production quasar build"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
-    "axios": "^0.18.1",
-    "core-js": "^3.6.5",
+    "@quasar/extras": "^1.9.10",
+    "axios": "^0.21.0",
+    "core-js": "^3.7.0",
     "firebase": "^8.0.2",
-    "firebase-admin": "^9.2.0",
+    "firebase-admin": "^9.4.1",
     "firebaseui": "^4.7.1",
-    "quasar": "^1.0.0"
+    "quasar": "^1.14.3"
   },
   "devDependencies": {
-    "@quasar/app": "^2.1.1",
+    "@quasar/app": "^2.1.6",
     "@quasar/quasar-app-extension-qenv": "^1.0.3",
     "cross-env": "^7.0.2"
   },
@@ -27,12 +30,6 @@
     "node": ">= 10.18.1",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
-  },
-  "scripts": {
-    "dev": "QENV=development quasar dev",
-    "test-dev": "QENV=test quasar dev",
-    "combined": "QENV=development+test quasar dev",
-    "build": "QENV=production quasar build"
   },
   "browserslist": [
     "ie >= 11",
