@@ -1,6 +1,7 @@
 {
   "name": "quasagram",
   "version": "0.0.1",
+  "dev": "cross-env QENV=development quasar dev",
   "description": "A Quasar Framework app",
   "productName": "Quasagram",
   "author": "Danny Connell",
@@ -12,18 +13,26 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
-    "firebase": "^8.0.0",
+    "firebase": "^8.0.2",
     "firebase-admin": "^9.2.0",
     "firebaseui": "^4.7.1",
     "quasar": "^1.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^2.1.1"
+    "@quasar/app": "^2.1.1",
+    "@quasar/quasar-app-extension-qenv": "^1.0.3",
+    "cross-env": "^7.0.2"
   },
   "engines": {
     "node": ">= 10.18.1",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
+  },
+  "scripts": {
+    "dev": "QENV=development quasar dev",
+    "test-dev": "QENV=test quasar dev",
+    "combined": "QENV=development+test quasar dev",
+    "build": "QENV=production quasar build"
   },
   "browserslist": [
     "ie >= 11",

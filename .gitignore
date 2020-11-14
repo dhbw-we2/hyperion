@@ -35,3 +35,5 @@ yarn-error.log*
 # Secrets
 serviceAccountKey.json
 config.json
+
+.quasar.env.json
