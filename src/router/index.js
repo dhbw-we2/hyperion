@@ -50,7 +50,7 @@ export default function (/* { store, ssrContext } */) {
         }
       } else if ((to.path === '/auth/register' && isAuthenticated(store)) ||
         (to.path === '/auth/login' && isAuthenticated(store))) {
-        next('/user')
+        next('/home')
       } else {
         next()
       }

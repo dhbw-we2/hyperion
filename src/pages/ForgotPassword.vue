@@ -4,8 +4,8 @@
       <div class="justify-center">
         <div class="login">
           <q-form class="authentication q-gutter-y-md" ref="forgotPasswordForm" @submit="onSubmit">
-            <h4 class="q-mb-none">Forgot Password</h4>
-            <div class="inst q-mb-lg">Please enter your email and we will send you a link to reset your password.</div>
+            <h4 class="q-mb-none">Passwort vergessen</h4>
+            <div class="inst q-mb-lg">Bitte gebe deine E-Mail Adresse ein. Wir schicken dir einen Link um dein Passwort zu ändern.</div>
             <q-input
               v-model="email"
               outlined
@@ -19,7 +19,7 @@
               type="email"
               :rules="[val => !!val || '*Field is required', val => val.includes('@') && val.includes('.') || '*Please Provide a valid email']"
             ></q-input>
-            <q-btn class="full-width q-mt-md" color="primary" data-cy="submit" label="RESET PASSWORD" :loading="loading"
+            <q-btn class="full-width q-mt-md" color="primary" data-cy="submit" label="Passwort Zurücksetzen" :loading="loading"
                    @click="onSubmit">
               <template v-slot:loading>
                 <q-spinner-gears></q-spinner-gears>

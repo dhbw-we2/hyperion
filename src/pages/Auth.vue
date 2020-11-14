@@ -65,11 +65,11 @@
             <p class="q-mt-md q-mb-none text-center">
               <router-link class="text-blue" :to="routeAuthentication">
                 <span v-if="isRegistration">Need to login?</span>
-                <span v-else>Need to create an account?</span>
+                <span v-else>Einen Account erstellen?</span>
               </router-link>
             </p>
             <p class="q-ma-sm text-center">
-              <router-link class="text-blue" to="forgotPassword">Forgot Password?</router-link>
+              <router-link class="text-blue" to="forgotPassword">Passwort vergessen?</router-link>
             </p>
 
 
@@ -127,6 +127,7 @@ export default {
                 await this.loginUser({email, password})
               }
               this.$router.push({path: '/home'})
+              console.log("working?")
             } catch (err) {
               console.error(err)
               this.$q.notify({
