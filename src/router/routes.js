@@ -13,7 +13,7 @@ const routes = [
   },
   {
     path: '/auth',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/LoginLayout.vue'),
     children: [
       {
         path: 'forgotPassword',

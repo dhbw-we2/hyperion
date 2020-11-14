@@ -9,29 +9,32 @@
           </q-avatar>
           Filmtracker
         </q-toolbar-title>
-<!--       <q-input dark v-model="search" filled type="search" color="white">
-          <template v-slot:append>
-            <q-btn class="btn">
-            <q-icon name="search" />
-            </q-btn>
-          </template>
-        </q-input>-->
+        <!--       <q-input dark v-model="search" filled type="search" color="white">
+                  <template v-slot:append>
+                    <q-btn class="btn">
+                    <q-icon name="search" />
+                    </q-btn>
+                  </template>
+                </q-input>-->
         <div class="absolute-center" style="min-width: 35%">
-        <q-input dark v-model="search" filled type="search" color="white" >
-          <template v-slot:after>
-            <q-btn round dense flat icon="search" @click="searchBtnClick" type="submit"/>
-          </template>
-        </q-input>
+          <q-input dark v-model="search" filled type="search" color="white">
+            <template v-slot:after>
+              <q-btn round dense flat icon="search" @click="searchBtnClick" type="submit"/>
+            </template>
+          </q-input>
         </div>
-        <q-btn dense color="secondary" icon-right="fas fa-sign-in-alt" label="Login" to="/login"/>
-        <q-btn dense flat round icon="menu" @click="right = !right" />
+        <q-btn v-if="!$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
+               label="Login" to="/auth/login"/>
+        <q-btn v-if="$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
+               label="Logout" @click="logout"/>
+        <q-btn dense flat round icon="menu" @click="right = !right"/>
 
       </q-toolbar>
 
       <q-tabs align="left">
-        <q-route-tab to="/home" label="Startseite" />
-        <q-route-tab to="/camera" label="Suche" />
-        <q-route-tab to="/trackerlist" label="Eigene Liste" />
+        <q-route-tab to="/home" label="Startseite"/>
+        <q-route-tab to="/camera" label="Suche"/>
+        <q-route-tab to="/trackerlist" label="Eigene Liste"/>
       </q-tabs>
     </q-header>
 
@@ -58,7 +61,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view/>
 
     </q-page-container>
 
@@ -66,33 +69,53 @@
 </template>
 
 <script>
+import {mapActions} from "vuex"
+
 export default {
-  data () {
+  data() {
     search: ''
     return {
       right: false
     }
   },
   methods: {
+    ...mapActions('auth', ['logoutUser']),
     searchBtnClick() {
       console.log(this.search);
       let test;
       test = this.search;
-      this.$router.replace({ name: "searchresult", params: {search: test}}).catch(err => {})
-  }
+      this.$router.replace({name: "searchresult", params: {search: test}}).catch(err => {
+      })
+    },
+    async logout() {
+      try {
+        await this.logoutUser()
+        this.$q.notify({
+          type: 'info',
+          message: "You are now logged out!"
+        })
+      } catch (err) {
+        this.$q.notify({
+          type: 'negative',
+          message: `${err}`,
+        })
+      }
+    }
   }
 }
 </script>
 
 <style lang="sass">
-  .q-toolbar
-    @media (min-width: $breakpoint-sm-min)
-      height: 77px
-  .q-toolbar__title
+.q-toolbar
+  @media (min-width: $breakpoint-sm-min)
+    height: 77px
+
+.q-toolbar__title
+  font-size: 30px
+  @media (max-width: $breakpoint-xs-max)
+    text-align: center
+
+.q-footer
+  .q-tab__icon
     font-size: 30px
-    @media (max-width: $breakpoint-xs-max)
-      text-align: center
-  .q-footer
-    .q-tab__icon
-      font-size: 30px
 </style>

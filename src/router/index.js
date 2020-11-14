@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import firebaseServices from '../services/firebase'
-import { Notify } from 'quasar'
-import { store } from '../store'
+import {Notify} from 'quasar'
+import {store} from '../store'
 
 
 import routes from './routes'
@@ -21,7 +21,7 @@ Vue.use(VueRouter)
 
 export default function (/* { store, ssrContext } */) {
   const Router = new VueRouter({
-    scrollBehavior: () => ({ x: 0, y: 0 }),
+    scrollBehavior: () => ({x: 0, y: 0}),
     routes,
 
     // Leave these as is and change from quasar.conf.js instead!
@@ -36,7 +36,7 @@ export default function (/* { store, ssrContext } */) {
   // Firebase is finished with its initialization process,
   // and handle the user accordingly
   Router.beforeEach(async (to, from, next) => {
-    const { ensureAuthIsInitialized, isAuthenticated } = firebaseServices
+    const {ensureAuthIsInitialized, isAuthenticated} = firebaseServices
     try {
       // Force the app to wait until Firebase has
       // finished its initialization, and handle the

@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex-center">
     Trackerlist Page
-    <q-btn dense flat round icon="menu" @click="loadData" />
+    <q-btn dense flat round icon="menu" @click="loadData"/>
     <ul>
       <li v-for="title in movieArray">{{ title.original_title + "und" + title.id }}</li>
     </ul>
@@ -18,8 +18,8 @@ export default {
     console.log("Parameter " + this.search)
     this.loadData(this.search)
   },
-  watch:{
-    $route (to, from){
+  watch: {
+    $route(to, from) {
       this.show = false;
       console.log("Route Changed")
       this.search = this.$route.params.search;
@@ -28,7 +28,7 @@ export default {
     }
   },
   name: "trackerlist",
-  data: function() {
+  data: function () {
     return {
       movieArray: []
     }

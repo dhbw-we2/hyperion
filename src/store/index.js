@@ -24,4 +24,4 @@ export default function (/* { ssrContext } */) {
   return Store
 }
 
-export { store }
+export {store}

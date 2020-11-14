@@ -1,25 +1,25 @@
 <template>
-<div class = "userlogin">
+  <div class="userlogin">
 
-  <!-- The surrounding HTML is left untouched by FirebaseUI.
-   Your app may use that space for branding, controls and other customizations.-->
-  <h1>Welcome to My Awesome App</h1>
-  <div id="firebaseui-auth-container"></div>
-  <div id="loader">Loading...</div>
+    <!-- The surrounding HTML is left untouched by FirebaseUI.
+     Your app may use that space for branding, controls and other customizations.-->
+    <h1>Welcome to My Awesome App</h1>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
 
-  <!-- registration for new users -->
-  <h1>Sign Up</h1>
-  <input type="text" placeholder="Username" v-model="username" />
-  <input type="text" placeholder="Password" v-model="password" />
-  <input
-    type="text"
-    placeholder="Password (repeat)"
-    v-model="password_repeat"
-  />
-  <input type="button" @click="signUp" value="Sign Up" />
-  <p v-if="msg">{{ msg }}</p>
+    <!-- registration for new users -->
+    <h1>Sign Up</h1>
+    <input type="text" placeholder="Username" v-model="username"/>
+    <input type="text" placeholder="Password" v-model="password"/>
+    <input
+      type="text"
+      placeholder="Password (repeat)"
+      v-model="password_repeat"
+    />
+    <input type="button" @click="signUp" value="Sign Up"/>
+    <p v-if="msg">{{ msg }}</p>
 
-</div>
+  </div>
 </template>
 
 <script>
@@ -86,22 +86,22 @@ export default {
     };
   },
 
-    // create registration view for new users
-    methods: {
-      async signUp() {
-        try {
-          const credentials = {
-            username: this.username,
-            password: this.password,
-            password_repeat: this.password_repeat
-          };
-          const response = await firebase.auth().signUp(credentials);
-          this.msg = response.msg;
-        } catch (error) {
-          this.msg = error.response.data.msg;
-        }
+  // create registration view for new users
+  methods: {
+    async signUp() {
+      try {
+        const credentials = {
+          username: this.username,
+          password: this.password,
+          password_repeat: this.password_repeat
+        };
+        const response = await firebase.auth().signUp(credentials);
+        this.msg = response.msg;
+      } catch (error) {
+        this.msg = error.response.data.msg;
       }
-    },
+    }
+  },
 }
 </script>
 

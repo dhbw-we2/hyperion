@@ -6,13 +6,13 @@
 
 export const createNewUser = async function ($root, data) {
   const $fb = this.$fb
-  const { email, password } = data
+  const {email, password} = data
   return $fb.createUserWithEmail(email, password)
 }
 
 export const loginUser = async function ($root, payload) {
   const $fb = this.$fb
-  const { email, password } = payload
+  const {email, password} = payload
   return $fb.loginWithEmail(email, password)
 }
 
@@ -21,7 +21,7 @@ export const logoutUser = async function ($root, payload) {
   await $fb.logoutUser()
 }
 
-export function routeUserToAuth () {
+export function routeUserToAuth() {
   this.$router.push({
     path: '/auth/login'
   })
