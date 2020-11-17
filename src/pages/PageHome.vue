@@ -60,16 +60,11 @@
 </template>
 
 <script>
-import db from '../db'
 
 export default {
   name: 'PageHome',
   async created() {
-    const userRef = db.collection('User');
-    const snapshot = await userRef.get();
-    snapshot.forEach(doc => {
-      console.log(doc.id, '=>', doc.data());
-    });
+
   }
 
 }
