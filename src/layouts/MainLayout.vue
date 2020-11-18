@@ -4,10 +4,13 @@
     <q-header elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar>
         <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" alt="Hier wäre ein Bild">
-          </q-avatar>
-          Filmtracker
+            <q-avatar>
+              <img @click="$router.push({ path: '../home' })"
+                   class="hover"
+                   src="../assets/icon_1.png" alt="Hier wäre ein Bild"
+              >
+            </q-avatar>
+            Filmtracker
         </q-toolbar-title>
         <!--       <q-input dark v-model="search" filled type="search" color="white">
                   <template v-slot:append>
@@ -33,7 +36,7 @@
 
       <q-tabs align="left">
         <q-route-tab to="/home" label="Startseite"/>
-        <q-route-tab to="/camera" label="Suche"/>
+        <q-route-tab to="/searcher" label="Suche"/>
         <q-route-tab to="/trackerlist" label="Eigene Liste"/>
       </q-tabs>
     </q-header>

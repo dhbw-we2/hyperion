@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page class="bg-home">
 
     <div class="q-pa-md doc-container">
 
@@ -7,7 +7,7 @@
 
         <div class="col">
           Poster 1
-          <q-img @click="$router.push({ path: 'camera' })"
+          <q-img @click="$router.push({ path: 'searcher' })"
                  src="https://images-na.ssl-images-amazon.com/images/I/71Zy0yoxrdL._AC_SL1023_.jpg"
                  class="hover rounded-borders"></q-img>
         </div>

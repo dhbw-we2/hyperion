@@ -5,7 +5,10 @@
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" alt="Hier wäre ein Bild">
+            <img @click="$router.push({ path: '../home' })"
+                 class="hover"
+                 src="../assets/icon_1.png" alt="Hier wäre ein Bild"
+            >
           </q-avatar>
           Filmtracker
         </q-toolbar-title>

@@ -6,8 +6,8 @@ const routes = [
     children: [
       { path: '/', redirect: 'home' },
       { path: 'home', component: () => import('pages/PageHome.vue') },
-      { path: 'camera', component: () => import('pages/PageCamera.vue') },
-      { name: 'searchresult', path: '/trackerlist/:search', component: () => import('pages/trackerlist.vue') },
+      { path: 'searcher', component: () => import('pages/PageSearch.vue') },
+      { name: 'searchresult', path: '/searcher/:search', component: () => import('pages/PageSearch.vue') },
       { path: 'trackerlist', component: () => import('pages/trackerlist.vue') },
       { path: 'login', component: () => import('pages/UserLogin.vue') }
     ]
