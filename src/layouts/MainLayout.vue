@@ -10,7 +10,8 @@
                    src="../assets/icon_1.png" alt="Hier wäre ein Bild"
               >
             </q-avatar>
-            Filmtracker
+          Filmtracker
+
         </q-toolbar-title>
         <!--       <q-input dark v-model="search" filled type="search" color="white">
                   <template v-slot:append>

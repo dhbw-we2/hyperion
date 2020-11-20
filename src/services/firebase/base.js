@@ -2,8 +2,17 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 /**
- * Firebase's auth interface method
- * https: //firebase.google.com/docs/reference/js/firebase.auth.html#callable
+ * Returns Firebase 's global namespace from which all Firebase services are accessed
+ * https://firebase.google.com/docs/reference/js/firebase.auth.html#callable
+ * @return {Object} Firebase Module
+ */
+export const self = () => {
+  return firebase
+}
+
+/**
+ * Returns Firebase 's auth service
+ * https://firebase.google.com/docs/reference/js/firebase.auth.html#callable
  * @return {Object} currentUser object from firebase
  */
 export const auth = () => {
@@ -14,13 +23,14 @@ export const auth = () => {
  * Async function providing the application time to
  * wait for firebase to initialize and determine if a
  * user is authenticated or not with only a single observable
+ *
  */
-export const ensureAuthIsInitialized = async (store) => {
+export const ensureAuthIsInitialized = (store) => {
   if (store.state.auth.isReady) return true
   // Create the observer only once on init
   return new Promise((resolve, reject) => {
     // Use a promise to make sure that the router will eventually show the route after the auth is initialized.
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(() => {
       resolve()
       unsubscribe()
     }, () => {
@@ -47,10 +57,16 @@ export const handleOnAuthStateChanged = async (store, currentUser) => {
   // Save to the store
   store.commit('auth/setAuthState', {
     isAuthenticated: currentUser !== null,
-    isReady: true
+    isReady: true,
+    uid: (currentUser ? currentUser.uid : '')
   })
 
-  // If the user loses authentication route
+  // Get & bind the current user
+  if (store.state.auth.isAuthenticated) {
+    await store.dispatch('user/getCurrentUser', currentUser.uid)
+  }
+
+  // If the user looses authentication route
   // them to the login page
   if (!currentUser && initialAuthState) {
     store.dispatch('auth/routeUserToAuth')
