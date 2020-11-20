@@ -18,6 +18,11 @@ jobs:
         shell: bash
         env:
           QUASAR_ENV: ${{ secrets.QUASAR_ENV }}
+      - name: Create config.json from secret
+        run: 'echo "CONFIG_JSON" > config.json'
+        shell: bash
+        env:
+          CONFIG_JSON: ${{ secrets.CONFIG_JSON }}
       - name: Build
         run: npm run build
       - name: Archive Production Artifact
