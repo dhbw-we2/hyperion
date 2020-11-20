@@ -19,7 +19,7 @@ jobs:
         env:
           QUASAR_ENV: ${{ secrets.QUASAR_ENV }}
       - name: Create config.json from secret
-        run: 'echo "CONFIG_ENV" > config.json'
+        run: 'echo "$CONFIG_ENV" > config.json'
         shell: bash
         env:
           CONFIG_ENV: ${{ secrets.CONFIG_ENV }}
