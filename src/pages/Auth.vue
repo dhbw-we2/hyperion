@@ -127,7 +127,6 @@ export default {
                 await this.loginUser({email, password})
               }
               this.$router.push({path: '/home'})
-              console.log("working?")
             } catch (err) {
               console.error(err)
               this.$q.notify({

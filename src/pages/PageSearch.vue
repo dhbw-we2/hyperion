@@ -22,17 +22,13 @@
 <script>
 export default {
   mounted() {
-    console.log("Route Changed")
     this.search = this.$route.params.search;
-    console.log("Parameter " + this.search)
     this.loadData(this.search)
   },
   watch: {
     $route(to, from) {
       this.show = false;
-      console.log("Route Changed")
       this.search = this.$route.params.search;
-      console.log("Parameter " + this.search)
       this.loadData(this.search)
     }
   },
@@ -54,17 +50,13 @@ export default {
       this.$axios.get(`${api_base_url}movie?api_key=${api_key}&query=${searchtext}&language=de`)
         .then((response) => {
           this.data = response.data
-          console.log(this.data)
-          console.log(this.data.results[0].original_title)
           this.data.results.forEach(function (entry) {
-            console.log(entry.original_title)
           })
           this.movieArray = this.data.results
           return this.data.results
 
         })
         .catch(() => {
-          console.log("Failed")
 
         })
     }
