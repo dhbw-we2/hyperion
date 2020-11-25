@@ -9,6 +9,7 @@ const routes = [
       { path: 'searcher', component: () => import('pages/PageSearch.vue') },
       { name: 'searchresult', path: '/searcher/:search', component: () => import('pages/PageSearch.vue') },
       { path: 'trackerlist', component: () => import('pages/trackerlist.vue'), meta: {requiresAuth: true}},
+      { path: 'profile', component: () => import('pages/Profile.vue'), meta: {requiresAuth: true}},
       { path: 'login', component: () => import('pages/UserLogin.vue') }
     ]
   },
