@@ -48,7 +48,7 @@
       <div>
 
         <q-list>
-          <q-item clickable v-ripple>
+          <q-item clickable v-ripple to="/profile">
             <q-item-section>Mein Profil</q-item-section>
           </q-item>
 
