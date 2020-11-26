@@ -14,7 +14,8 @@
                    :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
                    :alt="title.title"
                    width="200px"
-                   @click="handleBlur" placeholder="first name"
+                   @click="$router.push({ path: title.original_title });handleBlur()">
+<!--                   @click="handleBlur" placeholder="first name"-->
 
             ></q-img>
 
@@ -85,9 +86,32 @@ export default {
     handleBlur(event) {
       const el = event.target
       // do something here
-      //console.log('focus was set here')
-      let index = this.movieArray.title 
-      console.log(index)
+      //let index = this.data.results.forEach(this)
+      //console.log("Index: ", this.data.results.forEach(console.log))
+      //this.data.results.forEach(console.log)
+      //let index = this.data.results.item(this.movieArray[1])
+      //console.log(index)
+      //console.log(index.valueOf())
+      //this.loadMovie()
+      let config;
+      config = require('../../config.json')
+      let api_base_url;
+      api_base_url = 'https://api.themoviedb.org/3/movie/'
+      let api_key;
+      api_key = config.api_key_movie
+      let movie_id;
+      movie_id = el.id
+      this.$axios.get('${api_base_url}${movie_id}?api_key=${api_key}&language=de')
+        .then((response) => {
+          this.data = response.data.results
+          console.log(this.data)
+          return this.data.title
+        })
+        .catch(() => {
+        console.log("Das hier")
+
+        })
+        console.log("log ", this.data)
     }
   }
 
