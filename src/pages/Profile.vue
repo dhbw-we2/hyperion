@@ -15,7 +15,7 @@ export default {
     const state = this.$store.state.user.currentUser
     return {
       email: state.email,
-      fullName: state.fullName,
+      fullName: state.fullName
     }
   },
   computed: {
@@ -31,8 +31,10 @@ export default {
     ...mapMutations('user', ['setEditUserDialog']),
     async saveUserData () {
       const { currentUser} = this
-      const { email1 } = "test123@gmx.de"
-      const { fullName1 } = "gabriel"
+      let email_temp;
+      let fullName_temp;
+      email_temp = this.email
+      fullName_temp = this.fullName
       this.$q.loading.show({
         message: 'Updating your data, please stand by...',
         customClass: 'text-h3, text-bold'
@@ -40,8 +42,8 @@ export default {
       try {
         await this.updateUserData({
           id: currentUser.id,
-          email: email1,
-          fullName: fullName1,
+          email: email_temp,
+          fullName: fullName_temp,
         })
       } catch (err) {
         this.$q.notify({
