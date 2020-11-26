@@ -1,6 +1,6 @@
-<template>
+<template id="movieArray">
   <q-page class="bg-home">
-
+<!--
     <div class="q-pa-md doc-container">
 
       <div class="row items-start">
@@ -51,8 +51,36 @@
         </div>
 
       </div>
-    </div>
+    </div>-->
 
+    <q-page v-if="movieArray.title=undefined" class="flex-center">
+      test
+    </q-page>
+
+    <q-page v-else class="flex-center">
+      <div class="q-pa-md doc-container">
+
+        <div class="row items-start">
+          <div v-for="title in movieArray">
+
+
+            <q-img class="border-poster"
+                   :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
+                   :alt="title.title"
+                   width="200px"
+                   @click="$router.push({ path: title.original_title })"
+            ></q-img>
+
+
+          </div>
+        </div>
+      </div>
+
+
+    <div class="col" v-for="title in movieArray">
+      {{ title }}
+    </div>
+    </q-page>
 
   </q-page>
 
@@ -62,9 +90,50 @@
 <script>
 
 export default {
+  // actually displays the movie cover
+  mounted() {
+    this.loadData()
+  },
+  watch: {
+    $route(to,from){
+      this.show = false;
+      this.loadData()
+    }
+  },
   name: 'PageHome',
-  async created() {
+  data: function(){
+    return{
+      movieArray:[]
+    }
+  },
+  //async created() {},
+/*  async beforeCreate() {
+    this.search = this.$route.params.search;
+    this.loadData(this.search)
+  },*/
 
+  methods: {
+    loadData() {
+      let config;
+      config = require('../../config.json')
+      let api_base_url;
+      api_base_url = 'https://api.themoviedb.org/3/discover/'
+      let api_key;
+      api_key = config.api_key_movie
+      this.$axios.get(`${api_base_url}movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
+        .then((response) => {
+          this.data = response.data
+          this.data.results.forEach(function (entry) {
+          })
+          this.movieArray = this.data.results
+          console.log("test function")
+          return this.data.results
+
+        })
+        .catch(() => {
+          console.log("test catch")
+        })
+    }
   }
 
 }
