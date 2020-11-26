@@ -1,22 +1,37 @@
-<template>
-  <q-page class="flex-center">
-    Search Page
-    <!-- <q-btn dense flat round icon="menu" @click="loadData"/> -->
+<template id="movieArray">
+  <q-page v-if="movieArray.title=undefined" class="flex-center">
+    test
+  </q-page>
+    <!-- <q-btn dense flat round icon="menu" @click="loadData"/>
     <ul>
       <li v-for="title in movieArray">{{ title.original_title + " und " + title.id }}</li>
     </ul>
+    -->
+  <q-page v-else class="flex-center">
+    <div class="q-pa-md doc-container">
 
-    <div class="col" v-for="title in movieArray">
-       {{ title.original_title }}
-      <!-- <q-img src="" alt="Bild"> </q-img> -->
+      <div class="row items-start">
+      <div v-for="title in movieArray">
 
 
-    </div>
+           <q-img class="border-poster"
+                  :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
+                  :alt="title.title"
+                  width="200px"
+                  @click="$router.push({ path: title.original_title })"
+           ></q-img>
+
+
+          </div>
+          </div>
+      </div>
+
+
     <div class="col" v-for="title in movieArray">
       {{ title }}
     </div>
-
   </q-page>
+  <!--</q-page> -->
 </template>
 
 <script>
