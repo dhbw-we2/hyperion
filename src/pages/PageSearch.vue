@@ -56,6 +56,9 @@ export default {
 
   methods: {
     loadData(searchtext) {
+      if (searchtext == null){
+        return
+      }
       let config;
       config = require('../../config.json')
       let api_base_url;
