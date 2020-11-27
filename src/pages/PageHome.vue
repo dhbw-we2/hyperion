@@ -14,10 +14,11 @@
                    :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
                    :alt="title.title"
                    width="200px"
-                   @click="$router.push({ path: title.original_title });handleBlur()">
+                   @click="searchById(title.id)">
 <!--                   @click="handleBlur" placeholder="first name"-->
 
             ></q-img>
+            {{title.id}}
 
           </div>
         </div>
@@ -81,6 +82,11 @@ export default {
         .catch(() => {
 
         })
+    },
+
+    searchById(movieId) {
+      this.$router.replace({name: "searchresult", params: {search: movieId}}).catch(err => {
+      })
     },
 
     handleBlur(event) {
