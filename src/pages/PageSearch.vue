@@ -1,13 +1,10 @@
 <template id="movieArray">
-  <q-page v-if="movieArray.title=undefined" class="flex-center">
-    test
-  </q-page>
     <!-- <q-btn dense flat round icon="menu" @click="loadData"/>
     <ul>
       <li v-for="title in movieArray">{{ title.original_title + " und " + title.id }}</li>
     </ul>
     -->
-  <q-page v-else class="flex-center">
+  <q-page  class="flex-center">
     <div class="q-pa-md doc-container">
 
       <div class="row items-start">

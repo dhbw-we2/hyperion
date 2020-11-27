@@ -85,9 +85,9 @@ export default {
   methods: {
     ...mapActions('auth', ['logoutUser']),
     searchBtnClick() {
-      let test;
-      test = this.search;
-      this.$router.replace({name: "searchresult", params: {search: test}}).catch(err => {
+      let searchtext;
+      searchtext = this.search;
+      this.$router.replace({name: "searchresult", params: {search: searchtext}}).catch(err => {
       })
     },
     async logout() {
