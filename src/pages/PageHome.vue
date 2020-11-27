@@ -14,18 +14,17 @@
                    :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
                    :alt="title.title"
                    width="200px"
-                   @click="searchById(title.id)">
-<!--                   @click="handleBlur" placeholder="first name"-->
+                   @click="searchById(title.id)"/>
 
-            ></q-img>
 
           </div>
         </div>
         <q-pagination
           v-model="current"
-          :max="5"
-        >
-        </q-pagination>
+          :max="10"
+          :max-pages="6"
+          :boundary-numbers="false"/>
+
       </div>
       <!-- @click="this.loadData" -->
       <!--                   @click="$router.push({ path: title.original_title })"-->
