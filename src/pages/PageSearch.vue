@@ -4,24 +4,37 @@
       <li v-for="title in movieArray">{{ title.original_title + " und " + title.id }}</li>
     </ul>
     -->
-  <q-page  class="flex-center">
+  <q-page  class="flex-center bg-home" >
     <div class="q-pa-md doc-container">
 
       <div class="row items-start">
-      <div v-for="title in movieArray">
+        <div
+          v-for="title in movieArray"
+          class="border-poster-alwon bg-poster-alwon"
+          @click="$router.push({ path: title.original_title })"
+        >
 
+          <div>
+            <q-img
+              :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
+              :alt="title.title"
+              width="40%"
 
-           <q-img class="border-poster"
-                  :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
-                  :alt="title.title"
-                  width="200px"
-                  @click="$router.push({ path: title.original_title })"
-           ></q-img>
+            >
+            </q-img>
 
-
+            <div>
+             Titel:
+             {{ title.original_title }}
+             <p></p>
+             Erscheinungsdatum:
+              {{ title.release_date }}
+           </div>
           </div>
-          </div>
+
+        </div>
       </div>
+    </div>
 
 
     <div class="col" v-for="title in movieArray">
