@@ -11,26 +11,29 @@
         <div
           v-for="title in movieArray"
           class="border-poster-alwon bg-poster-alwon"
-          @click="$router.push({ path: title.original_title })"
+          @click="searchPosterClick"
         >
 
-          <div>
+          <div style="width:45%">
             <q-img
               :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
               :alt="title.title"
-              width="40%"
+              width="100%"
 
             >
             </q-img>
+          </div>
 
-            <div>
+            <div style="margin-left:45%">
              Titel:
              {{ title.original_title }}
              <p></p>
              Erscheinungsdatum:
               {{ title.release_date }}
+              <p></p>
+              {{ title.id }}
            </div>
-          </div>
+
 
         </div>
       </div>
@@ -46,6 +49,7 @@
 
 <script>
 export default {
+  name: "search",
   mounted() {
     this.search = this.$route.params.search;
     this.loadData(this.search)
@@ -57,14 +61,21 @@ export default {
       this.loadData(this.search)
     }
   },
-  name: "search",
   data: function () {
     return {
       movieArray: []
     }
   },
 
+
   methods: {
+    searchPosterClick() {
+      let searchid;
+      searchid = "671";
+      this.$router.replace({name: "searchidresult", params: {idsearch: searchid}}).catch(err => {
+      })
+    },
+
     loadData(searchtext) {
       if (searchtext == null){
         return
