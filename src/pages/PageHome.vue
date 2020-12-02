@@ -100,14 +100,6 @@ export default {
 
     handleBlur(event) {
       const el = event.target
-      // do something here
-      //let index = this.data.results.forEach(this)
-      //console.log("Index: ", this.data.results.forEach(console.log))
-      //this.data.results.forEach(console.log)
-      //let index = this.data.results.item(this.movieArray[1])
-      //console.log(index)
-      //console.log(index.valueOf())
-      //this.loadMovie()
       let config;
       config = require('../../config.json')
       let api_base_url;
