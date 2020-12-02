@@ -7,7 +7,7 @@
         <div
           v-for="title in movieArray"
           class="border-poster-alwon bg-poster-alwon"
-          @click="searchPosterClick"
+          @click="searchPosterClick()"
         >
 
           <div style="width:45%">

@@ -2,27 +2,26 @@
   <q-page class="flex-center">
 
 
-    <div class="col" v-for="title in extMovieArray">
-      {{ title }}
-      {{ title.original_title }}
-    </div>
+
     <div class="q-pa-md doc-container">
 
 
-    <div class="row items-start">
+    <div class="row items-start" v-model="extMovieArray">
+
       <div class="col">
-        <h3>Movie Titel</h3>
+        <h3>{{ extMovieArray.title }}</h3>
       </div>
 
       <div class="col">
         <q-img
-          src="../assets/bg_grid_search.jpg"
+          :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"
           alt="Nix"
           width="50%"
           height="40%"
         >
         </q-img>
       </div>
+
     </div>
 
     <div class="row">
@@ -31,8 +30,7 @@
         Genres: Abenteuer, Fantasy <p></p>
         Erscheinungsdatum: XX.XX.XXXX <p></p>
         Durschnittsbewertung: X.X <p></p>
-        Overview: blablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubb
-        blablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubb
+        Overview: {{ extMovieArray.overview }}
       </div>
 
       <div class="col">
@@ -84,14 +82,12 @@ export default {
       api_base_url = 'https://api.themoviedb.org/3/movie/'
       let api_key;
       api_key = config.api_key_movie
-      this.$axios.get(`${api_base_url}${searchid}?api_key=${api_key}`)
+      this.$axios.get(`${api_base_url}${searchid}?api_key=${api_key}&language=de`)
 
         .then((response) => {
           this.data = response.data
-          this.data.results.forEach(function (entry) {
-          })
-          this.extMovieArray = this.data.results
-          return this.data.results
+          this.extMovieArray= this.data
+          return this.data
 
         })
         .catch(() => {
