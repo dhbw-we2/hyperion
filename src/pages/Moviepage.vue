@@ -1,11 +1,50 @@
 <template>
   <q-page class="flex-center">
-    Movie Page
+
 
     <div class="col" v-for="title in extMovieArray">
       {{ title }}
       {{ title.original_title }}
     </div>
+    <div class="q-pa-md doc-container">
+
+
+    <div class="row items-start">
+      <div class="col">
+        <h3>Movie Titel</h3>
+      </div>
+
+      <div class="col">
+        <q-img
+          src="../assets/bg_grid_search.jpg"
+          alt="Nix"
+          width="50%"
+          height="40%"
+        >
+        </q-img>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        Altersfreigabe: keine <p></p>
+        Genres: Abenteuer, Fantasy <p></p>
+        Erscheinungsdatum: XX.XX.XXXX <p></p>
+        Durschnittsbewertung: X.X <p></p>
+        Overview: blablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubb
+        blablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubbblablablablubb
+      </div>
+
+      <div class="col">
+        <p></p>
+        <q-btn outline color="primary" label="Watch-List" @click="$router.push({ path: '../trackerlist' })" type="submit"/>
+        <p></p>
+        <q-btn outline color="primary" label="Watched-List" @click="$router.push({ path: '../trackerlist' })" type="submit"/>
+      </div>
+    </div>
+
+    </div>
+
 
 
   </q-page>

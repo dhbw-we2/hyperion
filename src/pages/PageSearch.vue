@@ -1,9 +1,5 @@
 <template id="movieArray">
-    <!-- <q-btn dense flat round icon="menu" @click="loadData"/>
-    <ul>
-      <li v-for="title in movieArray">{{ title.original_title + " und " + title.id }}</li>
-    </ul>
-    -->
+
   <q-page  class="flex-center bg-home" >
     <div class="q-pa-md doc-container">
 
@@ -44,7 +40,7 @@
       {{ title }}
     </div>
   </q-page>
-  <!--</q-page> -->
+
 </template>
 
 <script>
