@@ -15,7 +15,7 @@
       <div class="col">
         <q-img
           :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"
-          alt="Nix"
+          alt="poster"
           width="50%"
           height="40%"
         >
@@ -26,10 +26,11 @@
 
     <div class="row">
       <div class="col">
-        Altersfreigabe: keine <p></p>
-        Genres: Abenteuer, Fantasy <p></p>
+        Altersfreigabe: {{extMovieArray.rating}} <p></p>
+        Genres: {{ extMovieArray }} <p></p>
         Erscheinungsdatum: XX.XX.XXXX <p></p>
-        Durschnittsbewertung: X.X <p></p>
+        Produktion: {{ extMovieArray.production_companies }} <p></p>
+        Durschnittsbewertung: {{ extMovieArray.vote_average }} <p></p>
         Overview: {{ extMovieArray.overview }}
       </div>
 
@@ -87,6 +88,21 @@ export default {
         .then((response) => {
           this.data = response.data
           this.extMovieArray= this.data
+
+          let ageRating
+          if(this.extMovieArray.adult == false){
+            ageRating = "keine"
+          }
+          else{
+            ageRating = this.extMovieArray.adult
+          }
+
+          for(item in this.extMovieArray.production_companies){
+            if(item.id == 174){
+              console.log(item.id.name)
+            }
+          }
+
           return this.data
 
         })
