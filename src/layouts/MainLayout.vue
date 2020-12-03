@@ -7,7 +7,7 @@
             <q-avatar>
               <img @click="$router.push({ path: '../home' })"
                    class="hover"
-                   src="../assets/icon_1.png" alt="Hier wäre ein Bild"
+                   src="../assets/icon_1.png" alt="filmtracker"
               >
             </q-avatar>
           Filmtracker
@@ -31,7 +31,7 @@
                label="Login" to="/auth/login"/>
         <q-btn v-if="$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
                label="Logout" @click="logout"/>
-        <q-btn dense flat round icon="menu" @click="right = !right"/>
+        <!--<q-btn dense flat round icon="menu" @click="right = !right"/>-->
 
       </q-toolbar>
 
@@ -42,8 +42,7 @@
       </q-tabs>
     </q-header>
 
-    <q-drawer show-if-above v-model="right" side="right" elevated>
-      <!-- drawer content -->
+    <!--    <q-drawer show-if-above v-model="right" side="right" elevated>
 
       <div>
 
@@ -62,7 +61,7 @@
 
         </q-list>
       </div>
-    </q-drawer>
+    </q-drawer>-->
 
     <q-page-container>
       <router-view/>
