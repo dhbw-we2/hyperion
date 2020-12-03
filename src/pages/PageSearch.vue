@@ -7,7 +7,7 @@
         <div
           v-for="title in movieArray"
           class="border-poster-alwon bg-poster-alwon"
-          @click="searchPosterClick()"
+          @click="searchPosterClick(title.id)"
         >
 
           <div style="width:45%">
@@ -65,10 +65,8 @@ export default {
 
 
   methods: {
-    searchPosterClick() {
-      let searchid;
-      searchid = "671";
-      this.$router.replace({name: "searchidresult", params: {idsearch: searchid}}).catch(err => {
+    searchPosterClick(givenId) {
+      this.$router.replace({name: "searchidresult", params: {idsearch: givenId}}).catch(err => {
       })
     },
 

@@ -8,7 +8,7 @@
       <div class="q-pa-md doc-container">
 
         <div class="row items-start">
-          <div v-for="title in movieArray">
+          <div v-for="title in movieArray" >
 
             <q-img class="border-poster"
                    :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
@@ -62,12 +62,6 @@ export default {
         current: 1
       }
   },
-  //async created() {},
-
-/*  async beforeCreate() {
-    this.search = this.$route.params.search;
-    this.loadData(this.search)
-  },*/
 
   methods: {
     loadData() {
