@@ -88,7 +88,7 @@ export default {
     },
 
     searchById(movieId) {
-      this.$router.replace({name: "searchresult", params: {search: movieId}}).catch(err => {
+      this.$router.replace({name: "searchidresult", params: {idsearch: movieId}}).catch(err => {
       })
     },
 
