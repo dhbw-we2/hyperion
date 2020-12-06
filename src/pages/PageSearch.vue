@@ -6,7 +6,7 @@
       <div class="row items-start">
         <div
           v-for="title in movieArray"
-          class="border-poster-alwon bg-poster-alwon"
+          class="q-pa-ma bg-movie-image"
           @click="searchPosterClick(title.id)"
         >
 
@@ -14,31 +14,33 @@
             <q-img
               :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
               :alt="title.title"
-              width="100%"
+              width="120%"
 
             >
             </q-img>
           </div>
 
-            <div style="margin-left:45%">
-             Titel:
-             {{ title.original_title }}
-             <p></p>
-             Erscheinungsdatum:
+            <div style="text-align:center">
+                Titel:
+                {{ title.title }}
+                <p></p>
+             <div style="font-size: 80%">
+               Erscheinungsdatum:
               {{ title.release_date }}
               <p></p>
-              {{ title.id }}
+              Movie-ID: {{ title.id }}
+             </div>
            </div>
 
 
         </div>
       </div>
-    </div>
+       </div>
 
 
-    <div class="col" v-for="title in movieArray">
-      {{ title }}
-    </div>
+        <div class="col" v-for="title in movieArray">
+          {{ title }}
+        </div>
   </q-page>
 
 </template>
