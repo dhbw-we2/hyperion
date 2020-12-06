@@ -26,19 +26,26 @@
 
     <div class="row">
       <div class="col">
-        Altersfreigabe: {{extMovieArray.adult}}<p></p>
+        <span v-if="extMovieArray.adult = 'false'">
+          Altersfreigabe: keine
+        </span>
+        <span v-else>
+          Altersfreigabe: {{extMovieArray.adult}}
+        </span>
+        <p></p>
         Genres:
           <span v-for="name in extMovieArray.genres" :key="name">
              {{name.name }},
           </span>
+        <p></p>
         Erscheinungsdatum: {{extMovieArray.release_date}} <p></p>
-        <p>Produktion:
-          <li v-for="name in extMovieArray.production_companies" :key="name">
-            {{name.name }}
-          </li>
-        </p>
+        Produktion:
+          <span v-for="name in extMovieArray.production_companies" :key="name">
+            {{name.name }},
+          </span>
+        <p></p>
 
-        Durschnittsbewertung: {{ extMovieArray.vote_average }} <p></p>
+        Durschnittsbewertung: {{ extMovieArray.vote_average }} von 10.0 <p></p>
         Overview: {{ extMovieArray.overview }}
       </div>
 
