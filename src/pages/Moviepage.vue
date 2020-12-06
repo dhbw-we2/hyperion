@@ -27,11 +27,10 @@
     <div class="row">
       <div class="col">
         Altersfreigabe: {{extMovieArray.adult}}<p></p>
-        <p>Genres:
-          <li v-for="name in extMovieArray.genres" :key="name">
-             {{name.name }}
-          </li>
-        </p>
+        Genres:
+          <span v-for="name in extMovieArray.genres" :key="name">
+             {{name.name }},
+          </span>
         Erscheinungsdatum: {{extMovieArray.release_date}} <p></p>
         <p>Produktion:
           <li v-for="name in extMovieArray.production_companies" :key="name">
