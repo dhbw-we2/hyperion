@@ -1,4 +1,4 @@
-<template>
+<template xmlns:Altersfreigabe="http://www.w3.org/1999/xhtml">
   <q-page class="flex-center">
 
 
@@ -26,10 +26,19 @@
 
     <div class="row">
       <div class="col">
-        Altersfreigabe: {{extMovieArray.rating}} <p></p>
-        Genres: {{ extMovieArray }} <p></p>
-        Erscheinungsdatum: XX.XX.XXXX <p></p>
-        Produktion: {{ extMovieArray.production_companies }} <p></p>
+        Altersfreigabe: {{extMovieArray.adult}}<p></p>
+        <p>Genres:
+          <li v-for="name in extMovieArray.genres" :key="name">
+             {{name.name }}
+          </li>
+        </p>
+        Erscheinungsdatum: {{extMovieArray.release_date}} <p></p>
+        <p>Produktion:
+          <li v-for="name in extMovieArray.production_companies" :key="name">
+            {{name.name }}
+          </li>
+        </p>
+
         Durschnittsbewertung: {{ extMovieArray.vote_average }} <p></p>
         Overview: {{ extMovieArray.overview }}
       </div>
@@ -88,20 +97,6 @@ export default {
         .then((response) => {
           this.data = response.data
           this.extMovieArray= this.data
-
-          let ageRating
-          if(this.extMovieArray.adult == false){
-            ageRating = "keine"
-          }
-          else{
-            ageRating = this.extMovieArray.adult
-          }
-
-          for(item in this.extMovieArray.production_companies){
-            if(item.id == 174){
-              console.log(item.id.name)
-            }
-          }
 
           return this.data
 
