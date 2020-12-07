@@ -11,11 +11,7 @@
       <div class="col">
         <h3>{{ extMovieArray.title }}</h3>
 
-        <div v-model="video">
-          <iframe width="560" height="315" src=this.video></iframe> <p></p>
-        </div>
-
-<!--        <iframe width="560" height="315" src="https://www.youtube.com/embed/SUXWAEX2jlg?autoplay=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <p></p> -->
+        <iframe width="560" height="315" :src="videoEmbedLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <p></p>
       </div>
 
       <div class="col">
@@ -40,14 +36,14 @@
         </span>
         <p></p>
         Genres:
-          <span v-for="name in extMovieArray.genres" :key="name">
-             {{name.name }},
+          <span>
+             {{getGenres}}
           </span>
         <p></p>
         Erscheinungsdatum: {{extMovieArray.release_date}} <p></p>
         Produktion:
-          <span v-for="name in extMovieArray.production_companies" :key="name">
-            {{name.name }},
+          <span>
+            {{getProductionCompanies}}
           </span>
         <p></p>
 
@@ -89,8 +85,25 @@ export default {
 
   data: function () {
     return {
-      extMovieArray: []
+      extMovieArray: [],
+      videoEmbedLink: ""
+    }
+  },
 
+  computed: {
+    getGenres() {
+      if(this.extMovieArray.genres)
+      {
+        let genresArray = this.extMovieArray.genres.map(genre => genre.name)
+        return genresArray.join(", ")
+      }
+    },
+    getProductionCompanies() {
+      if(this.extMovieArray.production_companies)
+      {
+        let productionCompanies = this.extMovieArray.production_companies.map(company => company.name)
+        return productionCompanies.join(", ")
+      }
     }
   },
 
@@ -105,10 +118,6 @@ export default {
       api_base_url = 'https://api.themoviedb.org/3/movie/'
       let api_key;
       api_key = config.api_key_movie
-      let movie_id_url
-      movie_id_url = 550
-      let movie_id
-      movie_id = '{movie_id_url}/videos'
 
 
       this.$axios.get(`${api_base_url}${searchid}?api_key=${api_key}&language=de`)
@@ -117,12 +126,15 @@ export default {
           this.data = response.data
           this.extMovieArray= this.data
 
+          let movie_id
+          movie_id = `${this.extMovieArray.id}/videos`
+
           this.$axios.get(`${api_base_url}${movie_id}?api_key=${api_key}&language=de`)
 
             .then((response) => {
-              this.video = response.data
-              console.log("Hallo" + this.video)
-              //return this.video
+              const videoKey = response.data.results[0].key
+              // only youtube link
+              this.videoEmbedLink = `https://www.youtube.com/embed/${videoKey}?autoplay=0&modestbranding=1`
             })
 
           return this.data
