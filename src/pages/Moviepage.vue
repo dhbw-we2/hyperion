@@ -10,7 +10,12 @@
 
       <div class="col">
         <h3>{{ extMovieArray.title }}</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZCtGlBudoHg?autoplay=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <p></p>
+
+        <div v-model="video">
+          <iframe width="560" height="315" src=this.video></iframe> <p></p>
+        </div>
+
+<!--        <iframe width="560" height="315" src="https://www.youtube.com/embed/SUXWAEX2jlg?autoplay=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <p></p> -->
       </div>
 
       <div class="col">
@@ -85,6 +90,7 @@ export default {
   data: function () {
     return {
       extMovieArray: []
+
     }
   },
 
@@ -99,11 +105,25 @@ export default {
       api_base_url = 'https://api.themoviedb.org/3/movie/'
       let api_key;
       api_key = config.api_key_movie
+      let movie_id_url
+      movie_id_url = 550
+      let movie_id
+      movie_id = '{movie_id_url}/videos'
+
+
       this.$axios.get(`${api_base_url}${searchid}?api_key=${api_key}&language=de`)
 
         .then((response) => {
           this.data = response.data
           this.extMovieArray= this.data
+
+          this.$axios.get(`${api_base_url}${movie_id}?api_key=${api_key}&language=de`)
+
+            .then((response) => {
+              this.video = response.data
+              console.log("Hallo" + this.video)
+              //return this.video
+            })
 
           return this.data
 
