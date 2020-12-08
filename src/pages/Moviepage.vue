@@ -118,7 +118,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem']),
+    ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem', 'checkIfMovieIsInWatchList']),
     loadData(searchid) {
       if (searchid == null){
         return
@@ -156,6 +156,30 @@ export default {
         })
     },
     async addToWatchlist(movieId, authenticated) {
+      const { currentUser} = this
+      let alreadyIncluded;
+      let movieId_temp;
+      movieId_temp = movieId
+      try {
+        alreadyIncluded = await this.checkIfMovieIsInWatchList({
+          id: currentUser.id,
+          movieId: movieId_temp
+        })
+      } catch (err) {
+        this.$q.notify({
+          message: `Fehler bei Testfunktion: ${err}`,
+          color: 'negative'
+        })
+      } finally {
+        if (alreadyIncluded) {
+          this.$q.notify({
+            message: `Der Film ist bereits in deiner Watchlist`,
+            color: 'negative'
+          })
+          return
+        }
+        this.$q.loading.hide()
+      }
       console.log("Watchlist add: " + movieId)
       if(!authenticated) {
         this.$q.notify({
