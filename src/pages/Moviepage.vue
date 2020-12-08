@@ -53,9 +53,9 @@
 
       <div class="col">
         <p></p>
-        <q-btn outline color="primary" label="Watch-List" @click="$router.push({ path: '../trackerlist' })" type="submit"/>
+        <q-btn outline color="primary" label="Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
         <p></p>
-        <q-btn outline color="primary" label="Watched-List" @click="$router.push({ path: '../trackerlist' })" type="submit"/>
+        <q-btn outline color="primary" label="Watched-List" @click="addToWatchedlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
       </div>
     </div>
 
@@ -67,8 +67,11 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: "Moviepage",
+
 
   mounted() {
     this.idsearch = this.$route.params.idsearch;
@@ -84,6 +87,7 @@ export default {
   },
 
   data: function () {
+    const state = this.$store.state.user.currentUser
     return {
       extMovieArray: [],
       videoEmbedLink: ""
@@ -91,6 +95,12 @@ export default {
   },
 
   computed: {
+    ...mapGetters('user', ['currentUser']),
+    meta () {
+      return {
+        id: this.currentUser.id,
+      }
+    },
     getGenres() {
       if(this.extMovieArray.genres)
       {
@@ -108,6 +118,7 @@ export default {
   },
 
   methods: {
+    ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem']),
     loadData(searchid) {
       if (searchid == null){
         return
@@ -143,7 +154,71 @@ export default {
         .catch(() => {
 
         })
-    }
+    },
+    async addToWatchlist(movieId, authenticated) {
+      console.log("Watchlist add: " + movieId)
+      if(!authenticated) {
+        this.$q.notify({
+          type: 'negative',
+          message: "Für diese Aktion musst du eingeloggt sein!"
+        })
+      }
+      else {
+        const { currentUser} = this
+        let movieId_temp;
+        movieId_temp = movieId
+        try {
+          await this.updateUserAddWatchlistItem({
+            id: currentUser.id,
+            movieId: movieId_temp
+          })
+        } catch (err) {
+          this.$q.notify({
+            message: `Der Film konnte leider nicht zur Watchlist hinzugefügt werden: ${err}`,
+            color: 'negative'
+          })
+        } finally {
+          this.$q.loading.hide()
+          this.$q.notify({
+            type: 'positive',
+            message: "Der Film wurde zu deiner Watch-List hinzugefügt!"
+          })
+        }
+      }
+    },
+    async addToWatchedlist(movieId, authenticated) {
+      console.log("Watchedlist add: " + movieId)
+      if(!authenticated) {
+        this.$q.notify({
+          type: 'negative',
+          message: "Für diese Aktion musst du eingeloggt sein!"
+        })
+      }
+      else {
+        const { currentUser} = this
+        let movieId_temp;
+        movieId_temp = movieId
+        try {
+          await this.updateUserAddWatchedlistItem({
+            id: currentUser.id,
+            movieId: movieId_temp
+          })
+        } catch (err) {
+          this.$q.notify({
+            message: `Der Film konnte leider nicht zur Watchlist hinzugefügt werden: ${err}`,
+            color: 'negative'
+          })
+        } finally {
+          this.$q.loading.hide()
+          this.$q.notify({
+            type: 'positive',
+            message: "Der Film wurde zu deiner Watched-List hinzugefügt!"
+          })
+        }
+      }
+    },
+
+
   }
 }
 </script>
