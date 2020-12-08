@@ -38,3 +38,9 @@ export const checkIfMovieIsInWatchList = async function ({ state }, payload) {
   const includes = doc.data().watchListIds.includes(payload.movieId)
   return includes
 }
+
+export const checkIfMovieIsInWatchedList = async function ({ state }, payload) {
+  const doc = await userRef('users', payload.id).get()
+  const includes = doc.data().watchedListIds.includes(payload.movieId)
+  return includes
+}
