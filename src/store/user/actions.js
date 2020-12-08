@@ -32,3 +32,9 @@ export const updateUserAddWatchedlistItem = async function ({ state }, payload) 
     watchedListIds: firebase.firestore.FieldValue.arrayUnion(payload.movieId)
   })
 }
+
+export const checkIfMovieIsInWatchList = async function ({ state }, payload) {
+  const doc = await userRef('users', payload.id).get()
+  const includes = doc.data().watchListIds.includes(payload.movieId)
+  return includes
+}
