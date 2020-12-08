@@ -118,7 +118,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem', 'checkIfMovieIsInWatchList']),
+    ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem', 'checkIfMovieIsInWatchList', 'checkIfMovieIsInWatchedList']),
     loadData(searchid) {
       if (searchid == null){
         return
@@ -173,14 +173,13 @@ export default {
       } finally {
         if (alreadyIncluded) {
           this.$q.notify({
-            message: `Der Film ist bereits in deiner Watchlist`,
+            message: `Der Film ist bereits in deiner Watchlist!`,
             color: 'negative'
           })
           return
         }
         this.$q.loading.hide()
       }
-      console.log("Watchlist add: " + movieId)
       if(!authenticated) {
         this.$q.notify({
           type: 'negative',
@@ -211,7 +210,30 @@ export default {
       }
     },
     async addToWatchedlist(movieId, authenticated) {
-      console.log("Watchedlist add: " + movieId)
+      const { currentUser} = this
+      let alreadyIncluded;
+      let movieId_temp;
+      movieId_temp = movieId
+      try {
+        alreadyIncluded = await this.checkIfMovieIsInWatchedList({
+          id: currentUser.id,
+          movieId: movieId_temp
+        })
+      } catch (err) {
+        this.$q.notify({
+          message: `Fehler bei Testfunktion: ${err}`,
+          color: 'negative'
+        })
+      } finally {
+        if (alreadyIncluded) {
+          this.$q.notify({
+            message: `Der Film ist bereits in deiner Watched-List!`,
+            color: 'negative'
+          })
+          return
+        }
+        this.$q.loading.hide()
+      }
       if(!authenticated) {
         this.$q.notify({
           type: 'negative',
