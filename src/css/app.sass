@@ -44,12 +44,29 @@
 
 .bg-movie-image
   background-image: url(../assets/cinema.jpg)
-  height: 100%
   background-position: center
   background-repeat: no-repeat
   background-size: cover
-  background-color: rgba(255, 255, 255, 0.1)
+  background-color: rgba(255, 255, 255, 0.4)
   background-blend-mode: lighten
+  color: black
+  font-weight: bold
+  margin: 5px 1% 5px 1%
+  width: 23%
+  height: 240px
+  overflow: hidden
+  transition: height 0.001s
+  -webkit-transition: height 0.001s
+  float: left
+  position: relative
+  padding: 5px 5px 5px 5px
+  text-align: center
+
+.bg-movie-image:hover
+  box-shadow: 0px 0px 0px 4px black
+  cursor: pointer
+  width: 23%
+  height: 200%
 
 .login
   padding: 2em 4em
@@ -108,5 +125,13 @@
   color: white
   /* background-image: url("../assets/bg_grid_search.jpg") */
 
+.profile
+  transition: box-shadow 0.1s
+  padding: 5px 5px 5px 5px
+  text-align: center
 
-
+.profile:hover
+  box-shadow: 0px 0px 0px 4px black
+  cursor: pointer
+  width: 15%
+  height: 50%

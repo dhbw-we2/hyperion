@@ -20,8 +20,10 @@
             </q-img>
           </div>
 
-            <div style="text-align:center">
-                Titel:
+          <p></p> <!-- Abstand -->
+
+            <div style="text-align: center">
+                <!--Titel:-->
                 {{ title.title }}
                 <p></p>
              <div style="font-size: 80%">
@@ -38,9 +40,9 @@
        </div>
 
 
-        <div class="col" v-for="title in movieArray">
+<!--        <div class="col" v-for="title in movieArray">
           {{ title }}
-        </div>
+        </div>-->
   </q-page>
 
 </template>
