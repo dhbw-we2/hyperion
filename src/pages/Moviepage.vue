@@ -53,7 +53,8 @@
 
       <div class="col">
         <p></p>
-        <q-btn outline color="primary" label="Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
+        <q-btn v-if="inWatchList" outline color="primary" label="Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
+        <q-btn v-else outline color="primary" label="Lösche aus Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
         <p></p>
         <q-btn outline color="primary" label="Watched-List" @click="addToWatchedlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
       </div>
@@ -72,10 +73,24 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: "Moviepage",
 
+  data: function () {
+    const state = this.$store.state.user.currentUser
+    return {
+      extMovieArray: [],
+      videoEmbedLink: "",
+      inWatchList: false
+    }
+  },
 
-  mounted() {
+  async created() {
+    console.log(this.extMovieArray)
+    console.log("Funktioniert es:  " + await this.checkIfInWatchList(671583))
+  },
+  async mounted() {
+
     this.idsearch = this.$route.params.idsearch;
-    this.loadData(this.idsearch)
+    this.data = await  this.loadData(this.idsearch)
+    console.log(this.data)
   },
 
   watch: {
@@ -86,13 +101,7 @@ export default {
     }
   },
 
-  data: function () {
-    const state = this.$store.state.user.currentUser
-    return {
-      extMovieArray: [],
-      videoEmbedLink: ""
-    }
-  },
+
 
   computed: {
     ...mapGetters('user', ['currentUser']),
@@ -263,6 +272,37 @@ export default {
         }
       }
     },
+
+    async checkIfInWatchList(movieId) {
+      const { currentUser} = this
+      let alreadyIncluded;
+      let movieId_temp;
+      movieId_temp = movieId
+      try {
+        alreadyIncluded = await this.checkIfMovieIsInWatchList({
+          id: currentUser.id,
+          movieId: movieId_temp
+        })
+      } catch (err) {
+        this.$q.notify({
+          message: `Fehler bei Testfunktion: ${err}`,
+          color: 'negative'
+        })
+      } finally {
+        this.$q.loading.hide()
+        if (alreadyIncluded) {
+          this.$q.notify({
+            message: `Der Film ist bereits in deiner Watchlist!`,
+            color: 'negative'
+          })
+          return true
+        }
+        else {
+          return false
+        }
+
+      }
+    }
 
 
   }
