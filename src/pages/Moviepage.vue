@@ -1,5 +1,5 @@
 <template xmlns:Altersfreigabe="http://www.w3.org/1999/xhtml">
-  <q-page class="flex-center">
+  <q-page class="flex-center bg-searcher">
 
 
 
@@ -11,15 +11,16 @@
       <div class="col">
         <h3>{{ extMovieArray.title }}</h3>
 
-        <iframe width="560" height="315" :src="videoEmbedLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <p></p>
+        <iframe width="60%" height="400px" :src="videoEmbedLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <p></p>
       </div>
 
       <div class="col">
         <q-img
           :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"
           alt="poster"
-          width="50%"
-          height="40%"
+          width="30%"
+          height="30%"
+
         >
         </q-img>
       </div>
