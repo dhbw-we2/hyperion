@@ -7,7 +7,7 @@
     <q-page v-else class="flex-center">
       <div class="q-pa-md doc-container">
 
-        <div class="row items-start">
+        <div class="row items-start flex-center" >
           <div v-for="title in movieArray" >
 
             <q-img class="border-poster"

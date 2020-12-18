@@ -1,6 +1,6 @@
 <template id="movieArray">
 
-  <q-page  class="flex-center bg-home" >
+  <q-page  class="flex-center bg-searcher" >
     <div class="q-pa-md doc-container">
 
       <div class="row items-start">
