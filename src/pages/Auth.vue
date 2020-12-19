@@ -126,7 +126,7 @@ export default {
               } else {
                 await this.loginUser({email, password})
               }
-              this.$router.push({path: '/home'})
+              this.$router.push({path: '/'})
             } catch (err) {
               console.error(err)
               this.$q.notify({
