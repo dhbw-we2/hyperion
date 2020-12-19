@@ -14,6 +14,7 @@
                    :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
                    :alt="title.title"
                    width="200px"
+                   height="300px"
                    @click="searchById(title.id)"/>
 
 
