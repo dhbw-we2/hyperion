@@ -31,7 +31,8 @@
       <q-tabs align="left">
         <q-route-tab to="/home" label="Startseite"/>
         <q-tab label="Suche"/>
-        <q-route-tab to="/trackerlist" label="Eigene Liste"/>
+        <q-route-tab to="/watchlist" label="Watch-List"/>
+        <q-route-tab to="/watchlist" label="Watched-List"/>
       </q-tabs>
     </q-header>
 
