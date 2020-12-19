@@ -29,7 +29,7 @@
       </q-toolbar>
 
       <q-tabs align="left">
-        <q-route-tab to="/home" label="Startseite"/>
+        <q-route-tab to="/" label="Startseite"/>
         <q-tab label="Suche"/>
         <q-route-tab to="/watchlist" label="Watch-List"/>
         <q-route-tab to="/watchedlist" label="Watched-List"/>
