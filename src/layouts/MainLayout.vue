@@ -15,7 +15,7 @@
         </q-toolbar-title>
 
         <div class="absolute-center" style="min-width: 35%">
-          <q-input dark v-model="search" filled type="search" color="white">
+          <q-input dark v-model="search" filled type="search" color="white" @keydown.enter.prevent="searchBtnClick">
             <template v-slot:after>
               <q-btn round dense flat icon="search" @click="searchBtnClick" type="submit"/>
             </template>
@@ -49,9 +49,9 @@ import {mapActions} from "vuex"
 
 export default {
   data() {
-    search: ''
     return {
-      right: false
+      right: false,
+      search: ''
     }
   },
   methods: {
@@ -75,7 +75,7 @@ export default {
           message: `${err}`,
         })
       }
-    }
+    },
   }
 }
 </script>
