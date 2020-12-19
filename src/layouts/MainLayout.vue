@@ -5,7 +5,7 @@
       <q-toolbar>
         <q-toolbar-title>
             <q-avatar>
-              <img @click="$router.push({ path: '../home' })"
+              <img @click="$router.push({ path: '/' })"
                    class="hover"
                    src="../assets/icon_1.png" alt="filmtracker"
               >
