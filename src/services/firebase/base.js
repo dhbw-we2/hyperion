@@ -39,6 +39,24 @@ export const ensureAuthIsInitialized = (store) => {
   })
 }
 
+export const ensureUserDataIsInitialized = (store) => {
+  if (store.state.user.isReady) return true
+// Create the observer only once on init
+  return new Promise((resolve, reject) => {
+    let unwatch = store.watch((state) => {
+      return state.user.isReady
+    }, (isReady) => {
+      if (isReady) {
+        resolve()
+        unwatch()
+      }
+    })
+    setTimeout(() => {
+      reject("User Data Timeout")
+    }, 5000)
+  })
+}
+
 /** Convenience method to initialize firebase app
  * @param  {Object} config
  * @return {Object} App
@@ -64,12 +82,15 @@ export const handleOnAuthStateChanged = async (store, currentUser) => {
   // Get & bind the current user
   if (store.state.auth.isAuthenticated) {
     await store.dispatch('user/getCurrentUser', currentUser.uid)
+    await store.commit('user/setReady', true)
   }
 
   // If the user looses authentication route
   // them to the login page
   if (!currentUser && initialAuthState) {
-    store.dispatch('auth/routeUserToAuth')
+    await store.dispatch('auth/routeUserToAuth')
+    await store.dispatch('user/clearCurrentUser')
+    await store.commit('user/setReady', false)
   }
 }
 
