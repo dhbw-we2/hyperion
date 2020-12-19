@@ -26,12 +26,37 @@ export const updateUserAddWatchlistItem = async function ({ state }, payload) {
   })
 }
 
+export const updateUserDeleteWatchlistItem = async function ({state}, payload) {
+  return userRef('users', payload.id).update({
+    watchListIds: firebase.firestore.FieldValue.arrayRemove(payload.movieID)
+  })
+}
+
 
 export const updateUserAddWatchedlistItem = async function ({ state }, payload) {
   return userRef('users', payload.id).update({
     watchedListIds: firebase.firestore.FieldValue.arrayUnion(payload.movieId)
   })
 }
+
+export const updateUserDeleteWatchedlistItem = async function ({state}, payload) {
+  return userRef('users', payload.id).update({
+    watchedListIds: firebase.firestore.FieldValue.arrayRemove(payload.movieID)
+  })
+}
+
+export const getWholeWatchList = async function ({ state }, payload) {
+  const doc = await userRef('users', payload.id).get()
+  const watchListIds = doc.data().watchListIds
+  return watchListIds
+}
+
+export const getWholeWatchedList = async function ({ state }, payload) {
+  const doc = await userRef('users', payload.id).get()
+  const watchedListIds = doc.data().watchedListIds
+  return watchedListIds
+}
+
 
 export const checkIfMovieIsInWatchList = async function ({ state }, payload) {
   const doc = await userRef('users', payload.id).get()
