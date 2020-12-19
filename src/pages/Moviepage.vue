@@ -97,8 +97,7 @@ export default {
   mounted() {
 
     this.idsearch = this.$route.params.idsearch;
-    this.data = this.loadData(this.idsearch)
-    console.log(this.data)
+    this.loadData(this.idsearch)
   },
 
   watch: {
@@ -146,7 +145,6 @@ export default {
       api_base_url = 'https://api.themoviedb.org/3/movie/'
       let api_key;
       api_key = config.api_key_movie
-      console.log(config)
 
 
       this.$axios.get(`${api_base_url}${searchid}?api_key=${api_key}&language=de`)
@@ -174,29 +172,9 @@ export default {
         })
     },
     async addToWatchlist(movieId, authenticated) {
-      const { currentUser} = this
-      let alreadyIncluded;
+
       let movieId_temp;
       movieId_temp = movieId
-      try {
-        alreadyIncluded = await this.checkIfMovieIsInWatchList({
-          id: currentUser.id,
-          movieId: movieId_temp
-        })
-      } catch (err) {
-        this.$q.notify({
-          message: `Fehler bei Testfunktion: ${err}`,
-          color: 'negative'
-        })
-      } finally {
-        if (alreadyIncluded) {
-          this.$q.notify({
-            message: `Der Film ist bereits in deiner Watchlist!`,
-            color: 'negative'
-          })
-        }
-        this.$q.loading.hide()
-      }
       if(!authenticated) {
         this.$q.notify({
           type: 'negative',
@@ -281,16 +259,7 @@ export default {
       } finally {
         this.$q.loading.hide()
       }
-      if (alreadyIncluded) {
-        this.$q.notify({
-          message: `Der Film ist bereits in deiner Watchlist!`,
-          color: 'negative'
-        })
-        return true
-      }
-      else {
-        return false
-      }
+      return !!alreadyIncluded;
 
     },
 
@@ -311,16 +280,7 @@ export default {
 
 
       }
-      if (alreadyIncluded) {
-        this.$q.notify({
-          message: `Der Film ist bereits in deiner Watchlist!`,
-          color: 'negative'
-        })
-        return true
-      }
-      else {
-        return false
-      }
+      return !!alreadyIncluded;
     },
 
     async deleteFromWatchList(movieId, authenticated) {
@@ -345,7 +305,7 @@ export default {
           this.inWatchList = false
         } catch (err) {
           this.$q.notify({
-            message: `Fehler bei Testfunktion: ${err}`,
+            message: `Fehler beim Löschen: ${err}`,
             color: 'negative'
           })
         }
@@ -374,7 +334,7 @@ export default {
           this.inWatchedList = false
         } catch (err) {
           this.$q.notify({
-            message: `Fehler bei Testfunktion: ${err}`,
+            message: `Fehler bei Löschen: ${err}`,
             color: 'negative'
           })
         }
