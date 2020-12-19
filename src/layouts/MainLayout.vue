@@ -32,7 +32,7 @@
         <q-route-tab to="/home" label="Startseite"/>
         <q-tab label="Suche"/>
         <q-route-tab to="/watchlist" label="Watch-List"/>
-        <q-route-tab to="/watchlist" label="Watched-List"/>
+        <q-route-tab to="/watchedlist" label="Watched-List"/>
       </q-tabs>
     </q-header>
 
