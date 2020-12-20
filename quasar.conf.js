@@ -108,9 +108,9 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Filmtracker',
-        short_name: 'Filmtracker',
-        description: 'A Filmtracker App',
+        name: 'movietracker',
+        short_name: 'movietracker',
+        description: 'A movietracker app',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -176,7 +176,7 @@ module.exports = function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'filmtracker'
+        appId: 'movietracker'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
