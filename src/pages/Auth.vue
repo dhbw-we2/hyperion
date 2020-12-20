@@ -27,7 +27,7 @@
               autocomplete="current-password"
               color="primary"
               data-cy="password"
-              label="PASSWORD"
+              label="PASSWORT"
               :rules="[val => !!val || '*Field is required']"
               :type="isPwd ? 'password' : 'text'"
               @keyup.enter="onSubmit();"
@@ -43,7 +43,7 @@
               autocomplete="new-password"
               color="primary"
               data-cy="verifyPassword"
-              label="VERIFY PASSWORD"
+              label="PASSWORT WIEDERHOLEN"
               v-model="passwordMatch"
               :rules="[val => !!val || '*Field is required', val => val === password || '*Passwords don\'t match']"
               :type="isPwd ? 'password' : 'text'"
@@ -64,7 +64,7 @@
 
             <p class="q-mt-md q-mb-none text-center">
               <router-link class="text-blue" :to="routeAuthentication">
-                <span v-if="isRegistration">Need to login?</span>
+                <span v-if="isRegistration">Du hast bereits einen Account?</span>
                 <span v-else>Einen Account erstellen?</span>
               </router-link>
             </p>
@@ -89,7 +89,7 @@ export default {
   name: 'Auth',
   computed: {
     getAuthType() {
-      return this.isRegistration ? 'Register' : 'Login'
+      return this.isRegistration ? 'Account erstellen' : 'Login'
     },
     isRegistration() {
       return this.$route.name === 'Register'
@@ -114,8 +114,8 @@ export default {
         .then(async success => {
           if (success) {
             this.$q.loading.show({
-              message: this.isRegistration ? 'Registering your account...'
-                : 'Authenticating your account...',
+              message: this.isRegistration ? 'Dein Account wird erstellt...'
+                : 'Du wirst eingeloggt...',
               backgroundColor: 'grey',
               spinner: QSpinnerGears,
               customClass: 'loader'

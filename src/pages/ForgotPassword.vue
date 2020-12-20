@@ -58,7 +58,7 @@ export default {
               await this.$fb.auth().sendPasswordResetEmail(this.email)
               this.$q.notify({
                 color: 'positive',
-                message: 'A reset email was send to the email you registered with to reset your password.'
+                message: 'Eine EMAIL zur Passwortrücksetzung wurde an dich versendet.'
               })
             } catch (err) {
               this.$q.notify({
