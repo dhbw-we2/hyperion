@@ -10,7 +10,7 @@
                  src="../assets/icon_1.png" alt="Hier wäre ein Bild"
             >
           </q-avatar>
-          Filmtracker
+          movietracker
         </q-toolbar-title>
       </q-toolbar>
     </q-header>

@@ -1,9 +1,9 @@
 {
-  "name": "Filmtracker",
+  "name": "movietracker",
   "version": "0.0.1",
   "dev": "cross-env QENV=development quasar dev",
   "description": "A Quasar Framework app",
-  "productName": "Filmtracker",
+  "productName": "movietracker",
   "author": "Danny Connell",
   "private": true,
   "scripts": {
