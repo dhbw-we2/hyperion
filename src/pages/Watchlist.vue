@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex-center">
+  <q-page class="bg-watchlist flex-center">
 
     <div class="q-pa-md doc-container">
       <div class="row items-start flex-center" >
