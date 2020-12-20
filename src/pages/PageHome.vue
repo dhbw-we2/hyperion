@@ -106,14 +106,13 @@ export default {
       this.$axios.get('${api_base_url}${movie_id}?api_key=${api_key}&language=de')
         .then((response) => {
           this.data = response.data.results
-          console.log(this.data)
+
           return this.data.title
         })
         .catch(() => {
-        console.log("Das hier")
 
         })
-        console.log("log ", this.data)
+
     }
   }
 

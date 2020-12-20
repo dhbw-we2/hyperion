@@ -96,14 +96,14 @@ export default {
         })
       } finally {
         this.$q.loading.hide()
-        console.log(this.movieIDs)
+
 
       }
     },
 
     getEveryWatchListMovie(){
       this.movieIDs.forEach(element => this.loadData(element))
-      console.log(this.fullMovieArray)
+
     },
 
     loadData(searchid) {
