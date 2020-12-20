@@ -14,7 +14,7 @@
           </q-item>
         </q-card-section>
 <q-separator/>
-
+  <div class="large-screen-only">
     <q-card-section horizontal>
       <q-card-section style="width: 50%;">
         <img v-if="extMovieArray.poster_path"
@@ -75,6 +75,70 @@
       </q-card-section>
 
     </q-card-section>
+  </div>
+
+        <div class="small-screen-only">
+          <q-card-section>
+            <q-card-section style="width: 25%;">
+              <img v-if="extMovieArray.poster_path"
+                   :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"/>
+              <img v-else src="../assets/noposter.jpg"/>
+            </q-card-section>
+            <q-card-section>
+              <q-card-section>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label caption>
+                      Genres
+                    </q-item-label>
+                    <q-item-label>{{getGenres}}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-separator/>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label caption>
+                      Erscheinungsdatum
+                    </q-item-label>
+                    <q-item-label>{{extMovieArray.release_date}}</q-item-label>
+
+                  </q-item-section>
+                </q-item>
+                <q-separator/>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label caption>
+                      Produktion
+                    </q-item-label>
+                    <q-item-label>{{getProductionCompanies}}</q-item-label>
+
+                  </q-item-section>
+                </q-item>
+                <q-separator/>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label caption>
+                      Durschnittsbewertung
+                    </q-item-label>
+                    <q-item-label>{{ extMovieArray.vote_average }} von 10.0 </q-item-label>
+
+                  </q-item-section>
+                </q-item>
+                <q-separator/>
+                <q-item v-if="extMovieArray.overview">
+                  <q-item-section>
+                    <q-item-label caption>
+                      Overview
+                    </q-item-label>
+                    <q-item-label>{{ extMovieArray.overview }}</q-item-label>
+
+                  </q-item-section>
+                </q-item>
+              </q-card-section>
+            </q-card-section>
+
+          </q-card-section>
+        </div>
         <q-card-actions>
           <q-btn v-if="!inWatchList" outline color="primary" label="Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit" :loading="addingToWatchList"/>
           <q-btn v-else outline color="primary" label="Lösche aus Watch-List" @click="deleteFromWatchList(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
@@ -110,29 +174,6 @@
 </template>
 
 <style lang="sass" scoped>
-.my-card
-  min-width: 70%
-  max-width: 80%
-  background-color: rgba(90, 168, 220, 0.79)
-  border-style: solid
-  border-color: black
-  border-width: 2px
-
-.fluidMedia
-  position: relative
-  padding-bottom: 56.25% /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
-  height: 0
-  overflow: hidden
-
-
-
-.fluidMedia iframe
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-
 
 </style>
 

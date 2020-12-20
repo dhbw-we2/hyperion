@@ -14,6 +14,13 @@
   @media (min-width: $breakpoint-sm-min)
     display: block
 
+.medium-screen-only
+  @media (max-width: $breakpoint-xs-min)
+    display: none
+  @media (min-width: $breakpoint-sm-min)
+    display: block
+
+
 
 .constrain
   max-width: 975px
@@ -102,6 +109,29 @@
   background-size: cover
   background-color: rgba(255, 255, 255, 0.2)
   background-blend-mode: lighten
+
+.my-card
+  min-width: 50%
+  max-width: 80%
+  background-color: rgba(90, 168, 220, 0.79)
+  border-style: solid
+  border-color: black
+  border-width: 2px
+
+.fluidMedia
+  position: relative
+  padding-bottom: 56.25% /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
+  height: 0
+  overflow: hidden
+
+
+
+.fluidMedia iframe
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
 
 .border-poster
   box-shadow: 0px 0px 0px 0px black
