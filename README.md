@@ -1,4 +1,4 @@
-# movietracker
+# Movietracker
 Eine Web-Applikation zur Suche und Nachverfolgung von Filmen.
 
 Die Webseite kann sowohl ohne Benutzerkonto als auch mit einem Benutzerkonto genutzt werden.
