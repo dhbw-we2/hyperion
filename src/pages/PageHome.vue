@@ -20,11 +20,13 @@
 
           </div>
         </div>
+        <div class="row justify-center">
         <q-pagination
           v-model="current"
           :max="10"
           :max-pages="6"
           :boundary-numbers="false"/>
+        </div>
 
       </div>
       <!-- @click="this.loadData" -->
