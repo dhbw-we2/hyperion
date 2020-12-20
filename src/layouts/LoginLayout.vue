@@ -7,7 +7,7 @@
           <q-avatar>
             <img @click="$router.push({ path: '/' })"
                  class="hover"
-                 src="../assets/icon_1.png" alt="Hier wäre ein Bild"
+                 src="../assets/logo.png" alt="Hier wäre ein Bild"
             >
           </q-avatar>
           movietracker
