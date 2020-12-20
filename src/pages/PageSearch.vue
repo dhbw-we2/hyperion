@@ -30,10 +30,8 @@
             </div>
           </q-img>
 
-
         </div>
       </div>
-
 
         <div class="row justify-center">
           <q-pagination
@@ -42,9 +40,7 @@
             :max-pages="6"
             :boundary-numbers="false"/>
         </div>
-
       </div>
-
 
   </q-page>
 
