@@ -1,73 +1,133 @@
 <template>
   <q-page class="flex-center">
+    <div class="q-pa-md q-gutter-md row justify-center items-start" v-model="extMovieArray">
+      <q-card class="my-card" inline flat bordered>
+        <q-card-section>
+          <q-item>
+            <q-item-section>
+              <q-item-label caption>
+                Titel
+              </q-item-label>
+              <q-item-label class="text-weight-bolder">{{ extMovieArray.title }}</q-item-label>
 
+            </q-item-section>
+          </q-item>
+        </q-card-section>
+<q-separator/>
 
+    <q-card-section horizontal>
+      <q-card-section style="width: 50%;">
+        <img
+          :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"/>
+      </q-card-section>
+      <q-card-section>
+        <q-card-section>
+          <q-item>
+            <q-item-section>
+              <q-item-label caption>
+                Genres
+              </q-item-label>
+              <q-item-label>{{getGenres}}</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-separator/>
+          <q-item>
+            <q-item-section>
+              <q-item-label caption>
+                Erscheinungsdatum
+              </q-item-label>
+              <q-item-label>{{extMovieArray.release_date}}</q-item-label>
 
-    <div class="q-pa-md doc-container">
+            </q-item-section>
+          </q-item>
+          <q-separator/>
+          <q-item>
+            <q-item-section>
+              <q-item-label caption>
+                Produktion
+              </q-item-label>
+              <q-item-label>{{getProductionCompanies}}</q-item-label>
 
+            </q-item-section>
+          </q-item>
+          <q-separator/>
+          <q-item>
+            <q-item-section>
+              <q-item-label caption>
+                Durschnittsbewertung
+              </q-item-label>
+              <q-item-label>{{ extMovieArray.vote_average }} von 10.0 </q-item-label>
 
-    <div class="row items-start" v-model="extMovieArray">
+            </q-item-section>
+          </q-item>
+          <q-separator/>
+          <q-item v-if="extMovieArray.overview">
+            <q-item-section>
+              <q-item-label caption>
+                Overview
+              </q-item-label>
+              <q-item-label>{{ extMovieArray.overview }}</q-item-label>
 
-      <div class="col">
-        <h3>{{ extMovieArray.title }}</h3>
+            </q-item-section>
+          </q-item>
+        </q-card-section>
+      </q-card-section>
 
-        <!--suppress HtmlDeprecatedAttribute -->
-        <iframe width="560" height="315" :src="videoEmbedLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <p></p>
-      </div>
+    </q-card-section>
+        <q-card-actions>
+          <q-btn v-if="!inWatchList" outline color="primary" label="Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit" :loading="addingToWatchList"/>
+          <q-btn v-else outline color="primary" label="Lösche aus Watch-List" @click="deleteFromWatchList(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
+          <q-btn v-if="!inWatchedList" outline color="primary" label="Watched-List" @click="addToWatchedlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit" :loading="addingToWatchedList"/>
+          <q-btn v-else outline color="primary" label="Lösche aus Watched-List" @click="deleteFromWatchedList(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
 
-      <div class="col">
-        <q-img
-          :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"
-          alt="poster"
-          width="50%"
-          height="40%"
-        >
-        </q-img>
-      </div>
+          <q-space />
 
+          <q-btn v-if="trailerExists" label="Trailer anzeigen"
+            color="grey"
+            round
+            flat
+            dense
+            :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+            @click="expanded = !expanded"
+          />
+          <span v-else>Kein Trailer vorhanden!</span>
+        </q-card-actions>
+        <q-slide-transition>
+          <div v-show="expanded">
+            <q-separator />
+            <q-card-section class="text-subitle2">
+              <div class="fluidMedia">
+              <iframe :src="videoEmbedLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </q-card-section>
+          </div>
+        </q-slide-transition>
+      </q-card>
     </div>
-
-    <div class="row">
-      <div class="col">
-        <span v-if="extMovieArray.adult = 'false'">
-          Altersfreigabe: keine
-        </span>
-        <span v-else>
-          Altersfreigabe: {{extMovieArray.adult}}
-        </span>
-        <p></p>
-        Genres:
-          <span>
-             {{getGenres}}
-          </span>
-        <p></p>
-        Erscheinungsdatum: {{extMovieArray.release_date}} <p></p>
-        Produktion:
-          <span>
-            {{getProductionCompanies}}
-          </span>
-        <p></p>
-
-        Durschnittsbewertung: {{ extMovieArray.vote_average }} von 10.0 <p></p>
-        Overview: {{ extMovieArray.overview }}
-      </div>
-
-      <div class="col">
-        <p></p>
-        <q-btn v-if="!inWatchList" outline color="primary" label="Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit" :loading="addingToWatchList"/>
-        <q-btn v-else outline color="primary" label="Lösche aus Watch-List" @click="deleteFromWatchList(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
-        <p></p>
-        <q-btn v-if="!inWatchedList" outline color="primary" label="Watched-List" @click="addToWatchedlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit" :loading="addingToWatchedList"/>
-        <q-btn v-else outline color="primary" label="Lösche aus Watched-List" @click="deleteFromWatchedList(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
-      </div>
-    </div>
-
-    </div>
-
-
-
   </q-page>
 </template>
+
+<style lang="sass" scoped>
+.my-card
+  max-width: 80%
+
+.fluidMedia
+  position: relative
+  padding-bottom: 56.25% /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
+  height: 0
+  overflow: hidden
+
+
+
+.fluidMedia iframe
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+
+</style>
 
 <script>
 import { mapActions, mapGetters} from 'vuex'
@@ -85,6 +145,8 @@ export default {
       addingToWatchList: false,
       inWatchedList: false,
       addingToWatchedList: false,
+      expanded: false,
+      trailerExists: true,
       state
     }
   },
@@ -159,10 +221,15 @@ export default {
           this.$axios.get(`${api_base_url}${movie_id}?api_key=${api_key}&language=de`)
 
             .then((response) => {
+
               const videoKey = response.data.results[0].key
               // only youtube link
               this.videoEmbedLink = `https://www.youtube.com/embed/${videoKey}?autoplay=0&modestbranding=1`
             })
+            .catch(() => {
+                this.trailerExists = false
+            })
+
 
           return this.data
 
