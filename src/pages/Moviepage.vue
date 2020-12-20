@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex-center">
-    <div class="q-pa-md q-gutter-md row justify-center items-start" v-model="extMovieArray">
+    <div class="q-pa-md q-mt-lg q-gutter-md row justify-center items-start" v-model="extMovieArray">
       <q-card class="my-card" inline flat bordered>
         <q-card-section>
           <q-item>
@@ -109,7 +109,9 @@
 
 <style lang="sass" scoped>
 .my-card
+  min-width: 70%
   max-width: 80%
+  background-color: rgba(201, 76, 76, 0.3)
 
 .fluidMedia
   position: relative

@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <q-header elevated class="bg-primary text-white" height-hint="98">
+    <q-header elevated class="large-screen-only bg-primary text-white" height-hint="98">
       <q-toolbar>
         <q-toolbar-title>
             <q-avatar>
@@ -21,6 +21,7 @@
             </template>
           </q-input>
         </div>
+
         <q-btn v-if="!$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
                label="Login" to="/auth/login"/>
         <q-btn v-if="$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
@@ -36,6 +37,50 @@
       </q-tabs>
     </q-header>
 
+    <q-header elevated class="small-screen-only bg-primary text-white" height-hint="98">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img @click="$router.push({ path: '/' })"
+                 class="hover"
+                 src="../assets/icon_1.png" alt="filmtracker"
+            >
+          </q-avatar>
+          filmtracker
+
+        </q-toolbar-title>
+      </q-toolbar>
+      <q-toolbar>
+
+          <div class="row justify-center" style="margin-bottom: 10px; margin-top: 10px">
+          <q-input dark v-model="search" filled type="search" color="white" @keydown.enter.prevent="searchBtnClick">
+            <template v-slot:after>
+              <q-btn round dense flat icon="search" @click="searchBtnClick" type="submit"/>
+            </template>
+          </q-input>
+          </div>
+          <div class=" row justify-center" style="margin-left: 15px">
+          <q-btn v-if="!$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
+                 label="Login" to="/auth/login"/>
+          <q-btn v-if="$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
+                 label="Logout" @click="logout"/>
+          </div>
+
+
+
+
+      </q-toolbar>
+
+      <q-footer elevated>
+        <q-tabs align="left">
+          <q-route-tab to="/" label="Start"/>
+          <q-route-tab to="/watchlist" label="Watch-List"/>
+          <q-route-tab to="/watchedlist" label="Watched-List"/>
+        </q-tabs>
+      </q-footer>
+
+    </q-header>
+
     <q-page-container>
       <router-view/>
 
@@ -43,6 +88,7 @@
 
   </q-layout>
 </template>
+
 
 <script>
 import {mapActions} from "vuex"
@@ -93,4 +139,6 @@ export default {
 .q-footer
   .q-tab__icon
     font-size: 30px
+
+
 </style>
