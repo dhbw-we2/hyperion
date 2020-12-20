@@ -245,7 +245,7 @@ export default {
   computed: {
     ...mapGetters('user', ['currentUser']),
     /**
-     *
+     * returns ID of currentUser
      * @returns {{id: *}} currentUserID
      */
     meta() {
@@ -254,7 +254,7 @@ export default {
       }
     },
     /**
-     *
+     * get all genres of movie
      * @returns {string} genres
      */
     getGenres() {
@@ -264,7 +264,7 @@ export default {
       }
     },
     /**
-     *
+     * get all productionCompanies of movie
      * @returns {string} productionCompanies
      */
     getProductionCompanies() {
@@ -278,7 +278,7 @@ export default {
   methods: {
     ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem', 'checkIfMovieIsInWatchList', 'checkIfMovieIsInWatchedList', 'updateUserDeleteWatchlistItem', 'updateUserDeleteWatchedlistItem']),
     /**
-     * function to get movieData from MovieDB
+     * get movieData from MovieDB
      * @param searchid
      */
     loadData(searchid) {
@@ -324,7 +324,7 @@ export default {
     },
 
     /**
-     * function to add movie to watchlist
+     * add movie to watchlist
      * @param movieId
      * @param authenticated
      * @returns {Promise<void>}
@@ -368,7 +368,7 @@ export default {
     },
 
     /**
-     * function to add movie to watchedList
+     * add movie to watchedList
      * @param movieId
      * @param authenticated
      * @returns {Promise<void>}
@@ -409,7 +409,7 @@ export default {
     },
 
     /**
-     * function to check if movie is in Watchlist
+     * check if movie is in Watchlist
      * @param movieId
      * @returns {Promise<boolean>} isInWatchList
      */
@@ -433,7 +433,7 @@ export default {
 
 
     /**
-     * function to check if movie is in WatchedList
+     * check if movie is in WatchedList
      * @param movieId
      * @returns {Promise<boolean>} isInWatchedList
      */
@@ -458,7 +458,7 @@ export default {
     },
 
     /**
-     * function to delete movie form watchList
+     * delete movie form watchList
      * @param movieId
      * @param authenticated
      * @returns {Promise<void>}
@@ -493,7 +493,7 @@ export default {
     },
 
     /**
-     * function to delete movie from watchedList
+     * delete movie from watchedList
      * @param movieId
      * @param authenticated
      * @returns {Promise<void>}

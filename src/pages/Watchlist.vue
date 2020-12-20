@@ -50,7 +50,7 @@ import {mapActions, mapGetters} from "vuex";
 export default {
   name: "Watchlist",
   /**
-   *
+   * return data
    * @returns {{fullMovieArray: [], state: null, movieIDs: number}}
    */
   data() {
@@ -72,7 +72,6 @@ export default {
   computed: {
     ...mapGetters('user', ['currentUser']),
     /**
-     *
      * @returns {{id: *}} currentUserID
      */
     meta() {
@@ -94,7 +93,7 @@ export default {
     },
 
     /**
-     *
+     * get all movieIDs in watchList from FB
      * @returns {Promise<void>} watchListIDs
      */
     async get() {

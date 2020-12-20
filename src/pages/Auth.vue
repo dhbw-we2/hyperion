@@ -88,7 +88,7 @@ import {QSpinnerGears} from 'quasar'
 export default {
   name: 'Auth',
   /**
-   *
+   * returns data
    * @returns {{password: null, email: null, isPwd: boolean, passwordMatch: null}}
    */
   data() {
@@ -103,21 +103,21 @@ export default {
 
   computed: {
     /**
-     *
+     * gets the state of the page (register or login)
      * @returns {string} loginType
      */
     getAuthType() {
       return this.isRegistration ? 'Account erstellen' : 'Login'
     },
     /**
-     *
+     * checks if page of state is Register
      * @returns {boolean} isRegister
      */
     isRegistration() {
       return this.$route.name === 'Register'
     },
     /**
-     *
+     * sets route based on state
      * @returns {string} route
      */
     routeAuthentication() {
@@ -128,7 +128,7 @@ export default {
   methods: {
     ...mapActions('auth', ['createNewUser', 'loginUser']),
     /**
-     * function that logs the user in
+     * logs the user in
      */
     onSubmit() {
       const {email, password} = this

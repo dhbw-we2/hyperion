@@ -41,7 +41,7 @@ import {QSpinnerGears} from 'quasar'
 export default {
   name: 'ForgotPassword',
   /**
-   *
+   * returns data
    * @returns {{loading: boolean, email: string}}
    */
   data() {
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     /**
-     * function to reset password
+     * reset password
      */
     onSubmit() {
       this.$refs.forgotPasswordForm.validate()

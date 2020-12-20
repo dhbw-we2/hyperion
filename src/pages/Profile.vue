@@ -13,7 +13,7 @@ import {mapActions, mapGetters, mapMutations} from 'vuex'
 export default {
   name: 'UserSettings',
   /**
-   *
+   * return data
    * @returns {{fullName: string | {description: string, type: string} | string, email: *}}
    */
   data() {
@@ -26,7 +26,6 @@ export default {
   computed: {
     ...mapGetters('user', ['currentUser']),
     /**
-     *
      * @returns {{id: *}} currentUserID
      */
     meta() {

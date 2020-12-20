@@ -70,7 +70,6 @@ export default {
   computed: {
     ...mapGetters('user', ['currentUser']),
     /**
-     *
      * @returns {{id: *}} currentUserID
      */
     meta() {
@@ -92,7 +91,6 @@ export default {
     },
 
     /**
-     *
      * @returns {Promise<void>} watchedListIDs
      */
     async get() {
