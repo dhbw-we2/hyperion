@@ -10,7 +10,6 @@ const routes = [
       { path: 'watchlist', component: () => import('pages/Watchlist.vue'), meta: {requiresAuth: true}},
       { path: 'watchedlist', component: () => import('pages/Watchedlist.vue'), meta: {requiresAuth: true}},
       { path: 'profile', component: () => import('pages/Profile.vue'), meta: {requiresAuth: true}},
-      { path: 'login', component: () => import('pages/UserLogin.vue') },
       { path: 'movie', component: () => import('pages/Moviepage.vue') },
       { name: 'searchidresult', path: '/movie/:idsearch', component: () => import('pages/Moviepage.vue') }
     ]
