@@ -23,7 +23,7 @@
         </div>
 
           <div class="q-pa-md q-gutter-sm">
-            <q-btn to="/profile">
+            <q-btn v-if="$store.state.auth.isAuthenticated" to="/profile">
               <q-avatar
                 v-for="size in ['xm']"
                 :key="size"
@@ -72,7 +72,7 @@
           </div>
 
         <div class="q-pa-md q-gutter-sm">
-          <q-btn to="/profile">
+          <q-btn v-if="$store.state.auth.isAuthenticated" to="/profile">
             <q-avatar
               v-for="size in ['xm']"
               :key="size"
