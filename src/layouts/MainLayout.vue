@@ -7,7 +7,7 @@
             <q-avatar>
               <img @click="$router.push({ path: '/' })"
                    class="hover"
-                   src="../assets/icon_1.png" alt="movietracker"
+                   src="../assets/logo.png" alt="movietracker"
               >
             </q-avatar>
           movietracker
@@ -31,7 +31,6 @@
 
       <q-tabs align="left">
         <q-route-tab to="/" label="Startseite"/>
-        <q-tab label="Suche"/>
         <q-route-tab to="/watchlist" label="Watch-List"/>
         <q-route-tab to="/watchedlist" label="Watched-List"/>
       </q-tabs>
@@ -43,10 +42,10 @@
           <q-avatar>
             <img @click="$router.push({ path: '/' })"
                  class="hover"
-                 src="../assets/icon_1.png" alt="movietracker"
+                 src="../assets/icon_1.png" alt="filmtracker"
             >
           </q-avatar>
-          movietracker
+          filmtracker
 
         </q-toolbar-title>
       </q-toolbar>
