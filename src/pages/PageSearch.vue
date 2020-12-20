@@ -10,39 +10,21 @@
           @click="searchPosterClick(title.id)"
         >
 
-          <div style="width:45%">
-            <q-img
-              :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
-              :alt="title.title"
-              width="120%"
-
-            >
+          <q-card>
+            <q-img :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
+                   height="100%">
+              <div class="absolute-bottom">
+                <div class="text-h6">{{ title.title }}</div>
+                <div class="text-subtitle2">{{ title.release_date }}</div>
+              </div>
             </q-img>
-          </div>
 
-          <p></p> <!-- Abstand -->
-
-            <div style="text-align: center">
-                <!--Titel:-->
-                {{ title.title }}
-                <p></p>
-             <div style="font-size: 80%">
-               Erscheinungsdatum:
-              {{ title.release_date }}
-              <p></p>
-              Movie-ID: {{ title.id }}
-             </div>
-           </div>
-
-
+          </q-card>
         </div>
       </div>
-       </div>
+     </div>
 
 
-<!--        <div class="col" v-for="title in movieArray">
-          {{ title }}
-        </div>-->
   </q-page>
 
 </template>

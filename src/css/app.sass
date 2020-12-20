@@ -32,7 +32,6 @@
   max-width: 30em
   width: 100%
 
-
 .bg-image
   background-image: url(../assets/background_movie.jpg)
   height: 100%
@@ -43,30 +42,23 @@
   background-blend-mode: lighten
 
 .bg-movie-image
-  background-image: url(../assets/cinema.jpg)
-  background-position: center
-  background-repeat: no-repeat
-  background-size: cover
-  background-color: rgba(255, 255, 255, 0.4)
-  background-blend-mode: lighten
   color: black
   font-weight: bold
   margin: 5px 1% 5px 1%
   width: 23%
-  height: 240px
-  overflow: hidden
+  height: 50%
+  max-height: 640px
+  overflow: visible
   transition: height 0.001s
   -webkit-transition: height 0.001s
   float: left
   position: relative
-  padding: 5px 5px 5px 5px
   text-align: center
 
 .bg-movie-image:hover
-  box-shadow: 0px 0px 0px 4px black
   cursor: pointer
-  width: 23%
-  height: 200%
+  border-style: solid
+  border-width: 3px
 
 .login
   padding: 2em 4em
