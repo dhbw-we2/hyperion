@@ -1,10 +1,10 @@
 {
   "name": "movietracker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "dev": "cross-env QENV=development quasar dev",
-  "description": "A Quasar Framework app",
+  "description": "An MovieTracker built with Quasar",
   "productName": "movietracker",
-  "author": "Danny Connell",
+  "author": "Daniel Wulfert, Michaela Fleig und Gabriel Balzer",
   "private": true,
   "scripts": {
     "dev": "cross-env QENV=development quasar dev",
