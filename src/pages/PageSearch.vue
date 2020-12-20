@@ -6,12 +6,24 @@
         <div v-for="title in movieArray"
              @click="searchPosterClick(title.id)">
 
-          <q-img class="border-poster"
+          <q-img v-if="title.poster_path" class="border-poster"
                  :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
                  :alt="title.title"
                  width="200px"
                  height="300px"
                  >
+            <div class="absolute-bottom">
+              <div class="text-h6">{{ title.title }}</div>
+              <div class="text-subtitle2">{{ title.release_date }}</div>
+            </div>
+          </q-img>
+
+          <q-img v-else class="border-poster"
+                 src="../assets/noposter.jpg"
+                 :alt="title.title"
+                 width="200px"
+                 height="300px"
+          >
             <div class="absolute-bottom">
               <div class="text-h6">{{ title.title }}</div>
               <div class="text-subtitle2">{{ title.release_date }}</div>

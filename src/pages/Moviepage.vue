@@ -17,8 +17,9 @@
 
     <q-card-section horizontal>
       <q-card-section style="width: 50%;">
-        <img
+        <img v-if="extMovieArray.poster_path"
           :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"/>
+        <img v-else src="../assets/noposter.jpg"/>
       </q-card-section>
       <q-card-section>
         <q-card-section>
