@@ -2,27 +2,36 @@
 
   <q-page  class="flex-center bg-searcher" >
     <div class="q-pa-md doc-container">
+      <div class="row items-start flex-center" >
+        <div v-for="title in movieArray"
+             @click="searchPosterClick(title.id)">
 
-      <div class="row items-start">
-        <div
-          v-for="title in movieArray"
-          class="q-pa-ma bg-movie-image"
-          @click="searchPosterClick(title.id)"
-        >
+          <q-img class="border-poster"
+                 :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
+                 :alt="title.title"
+                 width="200px"
+                 height="300px"
+                 >
+            <div class="absolute-bottom">
+              <div class="text-h6">{{ title.title }}</div>
+              <div class="text-subtitle2">{{ title.release_date }}</div>
+            </div>
+          </q-img>
 
-          <q-card>
-            <q-img :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
-                   height="100%">
-              <div class="absolute-bottom">
-                <div class="text-h6">{{ title.title }}</div>
-                <div class="text-subtitle2">{{ title.release_date }}</div>
-              </div>
-            </q-img>
 
-          </q-card>
         </div>
       </div>
-     </div>
+
+
+        <div class="row justify-center">
+          <q-pagination
+            v-model="current"
+            :max="10"
+            :max-pages="6"
+            :boundary-numbers="false"/>
+        </div>
+
+      </div>
 
 
   </q-page>

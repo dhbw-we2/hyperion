@@ -29,12 +29,6 @@
         </div>
 
       </div>
-      <!-- @click="this.loadData" -->
-      <!--                   @click="$router.push({ path: title.original_title })"-->
-<!--
-    <div class="col" v-for="title in movieArray">
-      {{ title }}
-    </div> -->
     </q-page>
 
   </q-page>
