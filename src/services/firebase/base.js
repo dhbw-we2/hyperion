@@ -38,7 +38,10 @@ export const ensureAuthIsInitialized = (store) => {
     })
   })
 }
-
+/**
+ * Async function providing the application time to
+ * wait for the userContext to be set
+ */
 export const ensureUserDataIsInitialized = (store) => {
   if (store.state.user.isReady) return true
 // Create the observer only once on init
