@@ -3,12 +3,14 @@
     <q-page padding="padding">
       <div class="justify-center">
         <div class="login">
-          <q-form class="authentication q-gutter-y-md" ref="forgotPasswordForm" @submit="onSubmit">
+          <q-form ref="forgotPasswordForm" class="authentication q-gutter-y-md" @submit="onSubmit">
             <h4 class="q-mb-none">Passwort vergessen</h4>
-            <div class="inst q-mb-lg">Bitte gebe deine E-Mail Adresse ein. Wir schicken dir einen Link um dein Passwort zu ändern.</div>
+            <div class="inst q-mb-lg">Bitte gebe deine E-Mail Adresse ein. Wir schicken dir einen Link um dein Passwort
+              zu ändern.
+            </div>
             <q-input
               v-model="email"
-              outlined
+              :rules="[val => !!val || '*Field is required', val => val.includes('@') && val.includes('.') || '*Please Provide a valid email']"
               autocomplete="email"
               color="primary"
               data-cy="email"
@@ -16,10 +18,11 @@
               label="EMAIL"
               lazy-rules="lazy-rules"
               name="email"
+              outlined
               type="email"
-              :rules="[val => !!val || '*Field is required', val => val.includes('@') && val.includes('.') || '*Please Provide a valid email']"
             ></q-input>
-            <q-btn class="full-width q-mt-md" color="primary" data-cy="submit" label="Passwort Zurücksetzen" :loading="loading"
+            <q-btn :loading="loading" class="full-width q-mt-md" color="primary" data-cy="submit"
+                   label="Passwort Zurücksetzen"
                    @click="onSubmit">
               <template v-slot:loading>
                 <q-spinner-gears></q-spinner-gears>

@@ -42,7 +42,7 @@ export default function (/* { store, ssrContext } */) {
 // finished its initialization, and handle the
 // authentication state of the user properly
       await ensureAuthIsInitialized(store)
-      if(isAuthenticated(store)){
+      if (isAuthenticated(store)) {
         await ensureUserDataIsInitialized(store)
       }
       if (to.matched.some(record => record.meta.requiresAuth)) {

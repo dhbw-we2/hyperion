@@ -1,17 +1,18 @@
 <template>
-  <q-page  flex-center>
-    <q-input v-model="fullName" label="Username" :placeholder="currentUser.fullName" />
-    <q-input v-model="email" label="Mail" :placeholder="currentUser.email" readonly/>
-    <q-btn color="primary" label="Profil ändern!" @click="saveUserData" />
+  <q-page flex-center>
+    <q-input v-model="fullName" :placeholder="currentUser.fullName" label="Username"/>
+    <q-input v-model="email" :placeholder="currentUser.email" label="Mail" readonly/>
+    <q-btn color="primary" label="Profil ändern!" @click="saveUserData"/>
   </q-page>
 
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import {mapActions, mapGetters, mapMutations} from 'vuex'
+
 export default {
   name: 'UserSettings',
-  data () {
+  data() {
     const state = this.$store.state.user.currentUser
     return {
       email: state.email,
@@ -20,7 +21,7 @@ export default {
   },
   computed: {
     ...mapGetters('user', ['currentUser']),
-    meta () {
+    meta() {
       return {
         id: this.currentUser.id,
       }
@@ -29,8 +30,8 @@ export default {
   methods: {
     ...mapActions('user', ['updateUserData']),
     ...mapMutations('user', ['setEditUserDialog']),
-    async saveUserData () {
-      const { currentUser} = this
+    async saveUserData() {
+      const {currentUser} = this
       let email_temp;
       let fullName_temp;
       email_temp = this.email

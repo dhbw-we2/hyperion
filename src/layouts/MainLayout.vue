@@ -1,75 +1,26 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <q-header elevated class="large-screen-only bg-primary text-white" height-hint="98">
-      <q-toolbar>
-        <q-toolbar-title>
-            <q-avatar>
-              <img @click="$router.push({ path: '/' })"
-                   class="hover"
-                   src="../assets/logo.png" alt="movietracker"
-              >
-            </q-avatar>
-          movietracker
-
-        </q-toolbar-title>
-
-        <div class="absolute-center" style="min-width: 35%">
-          <q-input dark v-model="search" filled type="search" color="white" @keydown.enter.prevent="searchBtnClick">
-            <template v-slot:after>
-              <q-btn round dense flat icon="search" @click="searchBtnClick" type="submit"/>
-            </template>
-          </q-input>
-        </div>
-
-          <div class="q-pa-md q-gutter-sm">
-            <q-btn v-if="$store.state.auth.isAuthenticated" to="/profile">
-              <q-avatar
-                v-for="size in ['xm']"
-                :key="size"
-                :size="size"
-                color="primary"
-                text-color="white"
-                icon="person" />
-            </q-btn>
-          </div>
-
-        <q-btn v-if="!$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
-               label="Login" to="/auth/login"/>
-        <q-btn v-if="$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
-               label="Logout" @click="logout"/>
-
-      </q-toolbar>
-
-      <q-tabs align="left">
-        <q-route-tab to="/" label="Startseite"/>
-        <q-route-tab to="/watchlist" label="Watch-List"/>
-        <q-route-tab to="/watchedlist" label="Watched-List"/>
-      </q-tabs>
-    </q-header>
-
-    <q-header elevated class="small-screen-only bg-primary text-white" height-hint="98">
+    <q-header class="large-screen-only bg-primary text-white" elevated height-hint="98">
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
-            <img @click="$router.push({ path: '/' })"
+            <img alt="movietracker"
                  class="hover"
-                 src="../assets/logo.png" alt="movietracker"
+                 src="../assets/logo.png" @click="$router.push({ path: '/' })"
             >
           </q-avatar>
           movietracker
 
         </q-toolbar-title>
-      </q-toolbar>
-      <q-toolbar>
 
-          <div class="row justify-center" style="margin-bottom: 10px; margin-top: 10px">
-          <q-input dark v-model="search" filled type="search" color="white" @keydown.enter.prevent="searchBtnClick">
+        <div class="absolute-center" style="min-width: 35%">
+          <q-input v-model="search" color="white" dark filled type="search" @keydown.enter.prevent="searchBtnClick">
             <template v-slot:after>
-              <q-btn round dense flat icon="search" @click="searchBtnClick" type="submit"/>
+              <q-btn dense flat icon="search" round type="submit" @click="searchBtnClick"/>
             </template>
           </q-input>
-          </div>
+        </div>
 
         <div class="q-pa-md q-gutter-sm">
           <q-btn v-if="$store.state.auth.isAuthenticated" to="/profile">
@@ -78,28 +29,75 @@
               :key="size"
               :size="size"
               color="primary"
-              text-color="white"
-              icon="person" />
+              icon="person"
+              text-color="white"/>
           </q-btn>
         </div>
 
-          <div class=" row justify-center" style="margin-left: 15px">
-          <q-btn v-if="!$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
+        <q-btn v-if="!$store.state.auth.isAuthenticated" color="secondary" dense icon-right="fas fa-sign-in-alt"
+               label="Login" to="/auth/login"/>
+        <q-btn v-if="$store.state.auth.isAuthenticated" color="secondary" dense icon-right="fas fa-sign-in-alt"
+               label="Logout" @click="logout"/>
+
+      </q-toolbar>
+
+      <q-tabs align="left">
+        <q-route-tab label="Startseite" to="/"/>
+        <q-route-tab label="Watch-List" to="/watchlist"/>
+        <q-route-tab label="Watched-List" to="/watchedlist"/>
+      </q-tabs>
+    </q-header>
+
+    <q-header class="small-screen-only bg-primary text-white" elevated height-hint="98">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img alt="movietracker"
+                 class="hover"
+                 src="../assets/logo.png" @click="$router.push({ path: '/' })"
+            >
+          </q-avatar>
+          movietracker
+
+        </q-toolbar-title>
+      </q-toolbar>
+      <q-toolbar>
+
+        <div class="row justify-center" style="margin-bottom: 10px; margin-top: 10px">
+          <q-input v-model="search" color="white" dark filled type="search" @keydown.enter.prevent="searchBtnClick">
+            <template v-slot:after>
+              <q-btn dense flat icon="search" round type="submit" @click="searchBtnClick"/>
+            </template>
+          </q-input>
+        </div>
+
+        <div class="q-pa-md q-gutter-sm">
+          <q-btn v-if="$store.state.auth.isAuthenticated" to="/profile">
+            <q-avatar
+              v-for="size in ['xm']"
+              :key="size"
+              :size="size"
+              color="primary"
+              icon="person"
+              text-color="white"/>
+          </q-btn>
+        </div>
+
+        <div class=" row justify-center" style="margin-left: 15px">
+          <q-btn v-if="!$store.state.auth.isAuthenticated" color="secondary" dense icon-right="fas fa-sign-in-alt"
                  label="Login" to="/auth/login"/>
-          <q-btn v-if="$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
+          <q-btn v-if="$store.state.auth.isAuthenticated" color="secondary" dense icon-right="fas fa-sign-in-alt"
                  label="Logout" @click="logout"/>
-          </div>
-
-
+        </div>
 
 
       </q-toolbar>
 
       <q-footer elevated>
         <q-tabs align="left">
-          <q-route-tab to="/" label="Start"/>
-          <q-route-tab to="/watchlist" label="Watch-List"/>
-          <q-route-tab to="/watchedlist" label="Watched-List"/>
+          <q-route-tab label="Start" to="/"/>
+          <q-route-tab label="Watch-List" to="/watchlist"/>
+          <q-route-tab label="Watched-List" to="/watchedlist"/>
         </q-tabs>
       </q-footer>
 

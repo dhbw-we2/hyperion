@@ -2,15 +2,15 @@
   <q-page class="bg-watchlist flex-center">
 
     <div class="q-pa-md doc-container">
-      <div class="row items-start flex-center" >
+      <div class="row items-start flex-center">
         <div v-for="title in this.fullMovieArray"
              @click="searchPosterClick(title.id)">
 
-          <q-img v-if="title.poster_path" class="border-poster"
+          <q-img v-if="title.poster_path" :alt="title.title"
                  :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
-                 :alt="title.title"
-                 width="200px"
+                 class="border-poster"
                  height="300px"
+                 width="200px"
           >
             <div class="absolute-bottom">
               <div class="text-h6">{{ title.title }}</div>
@@ -18,11 +18,11 @@
             </div>
           </q-img>
 
-          <q-img v-else class="border-poster"
-                 src="../assets/noposter.jpg"
-                 :alt="title.title"
-                 width="200px"
+          <q-img v-else :alt="title.title"
+                 class="border-poster"
                  height="300px"
+                 src="../assets/noposter.jpg"
+                 width="200px"
           >
             <div class="absolute-bottom">
               <div class="text-h6">{{ title.title }}</div>
@@ -39,7 +39,6 @@
   </q-page>
 
 </template>
-
 
 
 <style scoped>
@@ -65,7 +64,7 @@ export default {
   },
   computed: {
     ...mapGetters('user', ['currentUser']),
-    meta () {
+    meta() {
       return {
         id: this.currentUser.id,
       }
@@ -80,7 +79,7 @@ export default {
     },
 
     async get() {
-      const { currentUser} = this
+      const {currentUser} = this
       try {
         this.movieIDs = await this.getWholeWatchedList({
           id: currentUser.id,
@@ -97,13 +96,13 @@ export default {
       }
     },
 
-    getEveryWatchListMovie(){
+    getEveryWatchListMovie() {
       this.movieIDs.forEach(element => this.loadData(element))
 
     },
 
     loadData(searchid) {
-      if (searchid == null){
+      if (searchid == null) {
         return
       }
       let config
@@ -116,8 +115,8 @@ export default {
 
       this.$axios.get(`${api_base_url}${searchid}?api_key=${api_key}&language=de`)
         .then((response) => {
-          this.data =response.data
-          this.extMovieArray= this.data
+          this.data = response.data
+          this.extMovieArray = this.data
           this.fullMovieArray.push(this.data)
         })
         .catch(() => {

@@ -1,4 +1,4 @@
 export default {
-  isAuthenticated: false,
-  isReady: false
+    isAuthenticated: false,
+    isReady: false
 }

@@ -7,25 +7,25 @@
     <q-page v-else class="flex-center">
       <div class="q-pa-md doc-container">
 
-        <div class="row items-start flex-center" >
-          <div v-for="title in movieArray" >
+        <div class="row items-start flex-center">
+          <div v-for="title in movieArray">
 
-            <q-img class="border-poster"
+            <q-img :alt="title.title"
                    :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
-                   :alt="title.title"
-                   width="200px"
+                   class="border-poster"
                    height="300px"
+                   width="200px"
                    @click="searchById(title.id)"/>
 
 
           </div>
         </div>
         <div class="row justify-center">
-        <q-pagination
-          v-model="current"
-          :max="10"
-          :max-pages="6"
-          :boundary-numbers="false"/>
+          <q-pagination
+            v-model="current"
+            :boundary-numbers="false"
+            :max="10"
+            :max-pages="6"/>
         </div>
 
       </div>
@@ -44,7 +44,7 @@ export default {
     this.loadData()
   },
   watch: {
-    $route(to,from){
+    $route(to, from) {
       this.show = false;
       this.loadData()
     },
@@ -53,11 +53,11 @@ export default {
     },
   },
   name: 'PageHome',
-  data: function(){
-      return {
-        movieArray: [],
-        current: 1
-      }
+  data: function () {
+    return {
+      movieArray: [],
+      current: 1
+    }
   },
 
   methods: {
@@ -115,8 +115,3 @@ export default {
 }
 </script>
 
-<style>
-.hover {
-  cursor: pointer;
-}
-</style>

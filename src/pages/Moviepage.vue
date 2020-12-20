@@ -1,88 +1,26 @@
 <template>
   <q-page class="bg-moviepage flex-center">
-    <div class="q-pt-xl  row justify-center items-start" v-model="extMovieArray">
-      <q-card class="my-card" inline flat bordered>
+    <div v-model="extMovieArray" class="q-pt-xl  row justify-center items-start">
+      <q-card bordered class="my-card" flat inline>
         <q-card-section>
           <q-item>
             <q-item-section>
               <q-item-label caption>
                 Titel
               </q-item-label>
-              <q-item-label style="font-size: 50px" class="text-weight-bolder">{{ extMovieArray.title }}</q-item-label>
+              <q-item-label class="text-weight-bolder" style="font-size: 50px">{{ extMovieArray.title }}</q-item-label>
 
             </q-item-section>
           </q-item>
         </q-card-section>
-<q-separator/>
-  <div class="large-screen-only">
-    <q-card-section horizontal>
-      <q-card-section style="width: 50%;">
-        <img v-if="extMovieArray.poster_path"
-          :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"/>
-        <img v-else src="../assets/noposter.jpg"/>
-      </q-card-section>
-      <q-card-section>
-        <q-card-section>
-          <q-item>
-            <q-item-section>
-              <q-item-label caption>
-                Genres
-              </q-item-label>
-              <q-item-label>{{getGenres}}</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-separator/>
-          <q-item>
-            <q-item-section>
-              <q-item-label caption>
-                Erscheinungsdatum
-              </q-item-label>
-              <q-item-label>{{extMovieArray.release_date}}</q-item-label>
-
-            </q-item-section>
-          </q-item>
-          <q-separator/>
-          <q-item>
-            <q-item-section>
-              <q-item-label caption>
-                Produktion
-              </q-item-label>
-              <q-item-label>{{getProductionCompanies}}</q-item-label>
-
-            </q-item-section>
-          </q-item>
-          <q-separator/>
-          <q-item>
-            <q-item-section>
-              <q-item-label caption>
-                Durschnittsbewertung
-              </q-item-label>
-              <q-item-label>{{ extMovieArray.vote_average }} von 10.0 </q-item-label>
-
-            </q-item-section>
-          </q-item>
-          <q-separator/>
-          <q-item v-if="extMovieArray.overview">
-            <q-item-section>
-              <q-item-label caption>
-                Overview
-              </q-item-label>
-              <q-item-label>{{ extMovieArray.overview }}</q-item-label>
-
-            </q-item-section>
-          </q-item>
-        </q-card-section>
-      </q-card-section>
-
-    </q-card-section>
-  </div>
-
-        <div class="small-screen-only">
-          <q-card-section>
-            <q-card-section style="width: 25%;">
+        <q-separator/>
+        <div class="large-screen-only">
+          <q-card-section horizontal>
+            <q-card-section style="width: 50%;">
               <img v-if="extMovieArray.poster_path"
+                   alt="Poster"
                    :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"/>
-              <img v-else src="../assets/noposter.jpg"/>
+              <img alt="No Poster" v-else src="../assets/noposter.jpg"/>
             </q-card-section>
             <q-card-section>
               <q-card-section>
@@ -91,7 +29,7 @@
                     <q-item-label caption>
                       Genres
                     </q-item-label>
-                    <q-item-label>{{getGenres}}</q-item-label>
+                    <q-item-label>{{ getGenres }}</q-item-label>
                   </q-item-section>
                 </q-item>
                 <q-separator/>
@@ -100,7 +38,7 @@
                     <q-item-label caption>
                       Erscheinungsdatum
                     </q-item-label>
-                    <q-item-label>{{extMovieArray.release_date}}</q-item-label>
+                    <q-item-label>{{ extMovieArray.release_date }}</q-item-label>
 
                   </q-item-section>
                 </q-item>
@@ -110,7 +48,7 @@
                     <q-item-label caption>
                       Produktion
                     </q-item-label>
-                    <q-item-label>{{getProductionCompanies}}</q-item-label>
+                    <q-item-label>{{ getProductionCompanies }}</q-item-label>
 
                   </q-item-section>
                 </q-item>
@@ -120,7 +58,70 @@
                     <q-item-label caption>
                       Durschnittsbewertung
                     </q-item-label>
-                    <q-item-label>{{ extMovieArray.vote_average }} von 10.0 </q-item-label>
+                    <q-item-label>{{ extMovieArray.vote_average }} von 10.0</q-item-label>
+
+                  </q-item-section>
+                </q-item>
+                <q-separator/>
+                <q-item v-if="extMovieArray.overview">
+                  <q-item-section>
+                    <q-item-label caption>
+                      Overview
+                    </q-item-label>
+                    <q-item-label>{{ extMovieArray.overview }}</q-item-label>
+
+                  </q-item-section>
+                </q-item>
+              </q-card-section>
+            </q-card-section>
+
+          </q-card-section>
+        </div>
+
+        <div class="small-screen-only">
+          <q-card-section>
+            <q-card-section style="width: 25%;">
+              <img alt="Poster" v-if="extMovieArray.poster_path"
+                   :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"/>
+              <img alt="No Poster" v-else src="../assets/noposter.jpg"/>
+            </q-card-section>
+            <q-card-section>
+              <q-card-section>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label caption>
+                      Genres
+                    </q-item-label>
+                    <q-item-label>{{ getGenres }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-separator/>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label caption>
+                      Erscheinungsdatum
+                    </q-item-label>
+                    <q-item-label>{{ extMovieArray.release_date }}</q-item-label>
+
+                  </q-item-section>
+                </q-item>
+                <q-separator/>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label caption>
+                      Produktion
+                    </q-item-label>
+                    <q-item-label>{{ getProductionCompanies }}</q-item-label>
+
+                  </q-item-section>
+                </q-item>
+                <q-separator/>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label caption>
+                      Durschnittsbewertung
+                    </q-item-label>
+                    <q-item-label>{{ extMovieArray.vote_average }} von 10.0</q-item-label>
 
                   </q-item-section>
                 </q-item>
@@ -140,29 +141,37 @@
           </q-card-section>
         </div>
         <q-card-actions>
-          <q-btn v-if="!inWatchList" outline color="primary" label="Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit" :loading="addingToWatchList"/>
-          <q-btn v-else outline color="primary" label="Lösche aus Watch-List" @click="deleteFromWatchList(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
-          <q-btn v-if="!inWatchedList" outline color="primary" label="Watched-List" @click="addToWatchedlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit" :loading="addingToWatchedList"/>
-          <q-btn v-else outline color="primary" label="Lösche aus Watched-List" @click="deleteFromWatchedList(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
+          <q-btn v-if="!inWatchList" :loading="addingToWatchList" color="primary" label="Watch-List"
+                 outline type="submit"
+                 @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)"/>
+          <q-btn v-else color="primary" label="Lösche aus Watch-List" outline
+                 type="submit" @click="deleteFromWatchList(extMovieArray.id, $store.state.auth.isAuthenticated)"/>
+          <q-btn v-if="!inWatchedList" :loading="addingToWatchedList" color="primary" label="Watched-List"
+                 outline type="submit"
+                 @click="addToWatchedlist(extMovieArray.id, $store.state.auth.isAuthenticated)"/>
+          <q-btn v-else color="primary" label="Lösche aus Watched-List" outline
+                 type="submit" @click="deleteFromWatchedList(extMovieArray.id, $store.state.auth.isAuthenticated)"/>
 
-          <q-space />
+          <q-space/>
 
-          <q-btn v-if="trailerExists" label="Trailer anzeigen"
-            color="black"
-            round
-            flat
-            dense
-            :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-            @click="expanded = !expanded"
+          <q-btn v-if="trailerExists" :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+                 color="black"
+                 dense
+                 flat
+                 label="Trailer anzeigen"
+                 round
+                 @click="expanded = !expanded"
           />
           <span v-else>Kein Trailer vorhanden!</span>
         </q-card-actions>
         <q-slide-transition>
           <div v-show="expanded">
-            <q-separator />
+            <q-separator/>
             <q-card-section class="text-subitle2">
               <div class="fluidMedia">
-              <iframe :src="videoEmbedLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe :src="videoEmbedLink" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        frameborder="0"></iframe>
               </div>
             </q-card-section>
           </div>
@@ -178,7 +187,7 @@
 </style>
 
 <script>
-import { mapActions, mapGetters} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 import {checkIfMovieIsInWatchList} from "src/store/user/actions";
 
 export default {
@@ -219,24 +228,21 @@ export default {
   },
 
 
-
   computed: {
     ...mapGetters('user', ['currentUser']),
-    meta () {
+    meta() {
       return {
         id: this.currentUser.id,
       }
     },
     getGenres() {
-      if(this.extMovieArray.genres)
-      {
+      if (this.extMovieArray.genres) {
         let genresArray = this.extMovieArray.genres.map(genre => genre.name)
         return genresArray.join(", ")
       }
     },
     getProductionCompanies() {
-      if(this.extMovieArray.production_companies)
-      {
+      if (this.extMovieArray.production_companies) {
         let productionCompanies = this.extMovieArray.production_companies.map(company => company.name)
         return productionCompanies.join(", ")
       }
@@ -246,7 +252,7 @@ export default {
   methods: {
     ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem', 'checkIfMovieIsInWatchList', 'checkIfMovieIsInWatchedList', 'updateUserDeleteWatchlistItem', 'updateUserDeleteWatchedlistItem']),
     loadData(searchid) {
-      if (searchid == null){
+      if (searchid == null) {
         return
       }
       let config;
@@ -261,7 +267,7 @@ export default {
 
         .then((response) => {
           this.data = response.data
-          this.extMovieArray= this.data
+          this.extMovieArray = this.data
 
           let movie_id
           movie_id = `${this.extMovieArray.id}/videos`
@@ -275,7 +281,7 @@ export default {
               this.videoEmbedLink = `https://www.youtube.com/embed/${videoKey}?autoplay=0&modestbranding=1`
             })
             .catch(() => {
-                this.trailerExists = false
+              this.trailerExists = false
             })
 
 
@@ -290,14 +296,13 @@ export default {
 
       let movieId_temp;
       movieId_temp = movieId
-      if(!authenticated) {
+      if (!authenticated) {
         this.$q.notify({
           type: 'negative',
           message: "Für diese Aktion musst du eingeloggt sein!"
         })
-      }
-      else {
-        const { currentUser} = this
+      } else {
+        const {currentUser} = this
         let movieId_temp;
         movieId_temp = movieId
         try {
@@ -327,14 +332,13 @@ export default {
     async addToWatchedlist(movieId, authenticated) {
       let movieId_temp;
       movieId_temp = movieId
-      if(!authenticated) {
+      if (!authenticated) {
         this.$q.notify({
           type: 'negative',
           message: "Für diese Aktion musst du eingeloggt sein!"
         })
-      }
-      else {
-        const { currentUser} = this
+      } else {
+        const {currentUser} = this
         let movieId_temp;
         movieId_temp = movieId
         try {
@@ -361,7 +365,7 @@ export default {
     },
 
     async checkIfInWatchList(movieId) {
-      const { currentUser} = this
+      const {currentUser} = this
       let alreadyIncluded;
       let movieId_temp;
       movieId_temp = movieId
@@ -379,7 +383,7 @@ export default {
     },
 
     async checkIfInWatchedList(movieId) {
-      const { currentUser} = this
+      const {currentUser} = this
       let alreadyIncluded;
       let movieId_temp;
       movieId_temp = movieId

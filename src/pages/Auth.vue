@@ -4,66 +4,66 @@
       <div class="justify-center">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-10 login">
           <h5 class="text-center">{{ getAuthType }}</h5>
-          <q-form class="authentication q-gutter-y-md" ref="emailAuthenticationForm" @submit="onSubmit">
+          <q-form ref="emailAuthenticationForm" class="authentication q-gutter-y-md" @submit="onSubmit">
             <q-input
               v-model="email"
-              outlined
+              :rules="[val => !!val || '*Field is required', val => val.includes('@') && val.includes('.') || '*Please Provide a valid email']"
               autocomplete="email"
               color="primary"
               data-cy="email"
               for="email"
+              label="EMAIL"
               lazy-rules="lazy-rules"
               name="email"
-              label="EMAIL"
+              outlined
               type="email"
-              :rules="[val => !!val || '*Field is required', val => val.includes('@') && val.includes('.') || '*Please Provide a valid email']"
             />
             <q-input
               v-model="password"
-              for="password"
-              name="password"
-              lazy-rules="lazy-rules"
-              outlined
+              :rules="[val => !!val || '*Field is required']"
+              :type="isPwd ? 'password' : 'text'"
               autocomplete="current-password"
               color="primary"
               data-cy="password"
+              for="password"
               label="PASSWORT"
-              :rules="[val => !!val || '*Field is required']"
-              :type="isPwd ? 'password' : 'text'"
+              lazy-rules="lazy-rules"
+              name="password"
+              outlined
               @keyup.enter="onSubmit();"
             >
               <template v-slot:append>
-                <q-icon class="cursor-pointer" :name="isPwd ? 'visibility_off' : 'visibility'" @click="isPwd = !isPwd"/>
+                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
               </template>
             </q-input>
             <q-input
               v-if="isRegistration"
-              lazy-rules="lazy-rules"
-              outlined
+              v-model="passwordMatch"
+              :rules="[val => !!val || '*Field is required', val => val === password || '*Passwords don\'t match']"
+              :type="isPwd ? 'password' : 'text'"
               autocomplete="new-password"
               color="primary"
               data-cy="verifyPassword"
               label="PASSWORT WIEDERHOLEN"
-              v-model="passwordMatch"
-              :rules="[val => !!val || '*Field is required', val => val === password || '*Passwords don\'t match']"
-              :type="isPwd ? 'password' : 'text'"
+              lazy-rules="lazy-rules"
+              outlined
               @keyup.enter="onSubmit();"
             >
               <template v-slot:append>
-                <q-icon class="cursor-pointer" :name="isPwd ? 'visibility_off' : 'visibility'" @click="isPwd = !isPwd"/>
+                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
               </template>
             </q-input>
             <q-btn
+              :label="getAuthType"
               class="full-width q-mt-md"
               color="primary"
               data-cy="submit"
               type="submit"
-              :label="getAuthType"
             >
             </q-btn>
 
             <p class="q-mt-md q-mb-none text-center">
-              <router-link class="text-blue" :to="routeAuthentication">
+              <router-link :to="routeAuthentication" class="text-blue">
                 <span v-if="isRegistration">Du hast bereits einen Account?</span>
                 <span v-else>Einen Account erstellen?</span>
               </router-link>

@@ -18,7 +18,7 @@ export default class User {
    * @param  {Object} args - User arguments supplied during
    * user creation
    */
-  constructor (args) {
+  constructor(args) {
     Object.keys(args).forEach((v, i) => {
       this[v] = args[v]
     })

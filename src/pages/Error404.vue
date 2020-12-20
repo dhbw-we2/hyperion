@@ -4,6 +4,7 @@
       <img
         src="~assets/sad.svg"
         style="width:30vw;max-width:150px;"
+        alt="Trauriger Smiley!"
       >
     </p>
     <p class="text-faded">
@@ -11,9 +12,9 @@
     </p>
     <q-btn
       color="secondary"
+      label="Go back"
       style="width:200px;"
       to="/"
-      label="Go back"
     />
   </div>
 </template>

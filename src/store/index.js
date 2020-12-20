@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { vuexfireMutations } from 'vuexfire'
+import {vuexfireMutations} from 'vuexfire'
 
 import auth from './auth'
 import user from './user'

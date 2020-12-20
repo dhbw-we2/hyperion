@@ -1,28 +1,28 @@
 <template id="movieArray">
 
-  <q-page  class="bg-home flex-center bg-searcher" >
+  <q-page class="bg-home flex-center bg-searcher">
     <div class="q-pa-md doc-container">
-      <div class="row items-start flex-center" >
+      <div class="row items-start flex-center">
         <div v-for="title in movieArray"
              @click="searchPosterClick(title.id)">
 
-          <q-img v-if="title.poster_path" class="border-poster"
+          <q-img v-if="title.poster_path" :alt="title.title"
                  :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
-                 :alt="title.title"
-                 width="200px"
+                 class="border-poster"
                  height="300px"
-                 >
+                 width="200px"
+          >
             <div class="absolute-bottom">
               <div class="text-h6">{{ title.title }}</div>
               <div class="text-subtitle2">{{ title.release_date }}</div>
             </div>
           </q-img>
 
-          <q-img v-else class="border-poster"
-                 src="../assets/noposter.jpg"
-                 :alt="title.title"
-                 width="200px"
+          <q-img v-else :alt="title.title"
+                 class="border-poster"
                  height="300px"
+                 src="../assets/noposter.jpg"
+                 width="200px"
           >
             <div class="absolute-bottom">
               <div class="text-h6">{{ title.title }}</div>
@@ -33,14 +33,14 @@
         </div>
       </div>
 
-        <div class="row justify-center">
-          <q-pagination
-            v-model="current"
-            :max="10"
-            :max-pages="6"
-            :boundary-numbers="false"/>
-        </div>
+      <div class="row justify-center">
+        <q-pagination
+          v-model="current"
+          :boundary-numbers="false"
+          :max="10"
+          :max-pages="6"/>
       </div>
+    </div>
 
   </q-page>
 
@@ -74,7 +74,7 @@ export default {
     },
 
     loadData(searchtext) {
-      if (searchtext == null){
+      if (searchtext == null) {
         return
       }
       let config;
