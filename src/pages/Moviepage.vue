@@ -148,7 +148,7 @@
                  type="submit" @click="deleteFromWatchList(extMovieArray.id, $store.state.auth.isAuthenticated)"/>
           <q-btn v-if="!inWatchedList" :loading="addingToWatchedList" color="primary" label="Watched-List"
                  outline type="submit"
-                 @click="addToWatchedlist(extMovieArray.id, $store.state.auth.isAuthenticated)"/>
+                 @click="addToWatchedList(extMovieArray.id, $store.state.auth.isAuthenticated)"/>
           <q-btn v-else color="primary" label="Lösche aus Watched-List" outline
                  type="submit" @click="deleteFromWatchedList(extMovieArray.id, $store.state.auth.isAuthenticated)"/>
 
@@ -192,8 +192,11 @@ import {checkIfMovieIsInWatchList} from "src/store/user/actions";
 
 export default {
   name: "Moviepage",
-
-  data: function () {
+  /**
+   *
+   * @returns {{expanded: boolean, addingToWatchList: boolean, inWatchList: boolean, trailerExists: boolean, videoEmbedLink: string, inWatchedList: boolean, state: null, addingToWatchedList: boolean, extMovieArray: []}}
+   */
+  data() {
     const state = this.$store.state.user.currentUser
     return {
       extMovieArray: [],
@@ -208,18 +211,29 @@ export default {
     }
   },
 
+  /**
+   * function to change buttons based on DB state
+   * @returns {Promise<void>}
+   */
   async created() {
     this.idsearch = this.$route.params.idsearch
     this.inWatchList = await this.checkIfInWatchList(this.idsearch)
     this.inWatchedList = await this.checkIfInWatchedList(this.idsearch)
   },
+  /**
+   * load movies when page is finished loading
+   */
   mounted() {
-
     this.idsearch = this.$route.params.idsearch;
     this.loadData(this.idsearch)
   },
 
   watch: {
+    /**
+     * reload movies on route change
+     * @param to
+     * @param from
+     */
     $route(to, from) {
       this.show = false;
       this.idsearch = this.$route.params.idsearch;
@@ -230,17 +244,29 @@ export default {
 
   computed: {
     ...mapGetters('user', ['currentUser']),
+    /**
+     *
+     * @returns {{id: *}} currentUserID
+     */
     meta() {
       return {
         id: this.currentUser.id,
       }
     },
+    /**
+     *
+     * @returns {string} genres
+     */
     getGenres() {
       if (this.extMovieArray.genres) {
         let genresArray = this.extMovieArray.genres.map(genre => genre.name)
         return genresArray.join(", ")
       }
     },
+    /**
+     *
+     * @returns {string} productionCompanies
+     */
     getProductionCompanies() {
       if (this.extMovieArray.production_companies) {
         let productionCompanies = this.extMovieArray.production_companies.map(company => company.name)
@@ -251,6 +277,10 @@ export default {
 
   methods: {
     ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem', 'checkIfMovieIsInWatchList', 'checkIfMovieIsInWatchedList', 'updateUserDeleteWatchlistItem', 'updateUserDeleteWatchedlistItem']),
+    /**
+     * function to get movieData from MovieDB
+     * @param searchid
+     */
     loadData(searchid) {
       if (searchid == null) {
         return
@@ -292,6 +322,13 @@ export default {
 
         })
     },
+
+    /**
+     * function to add movie to watchlist
+     * @param movieId
+     * @param authenticated
+     * @returns {Promise<void>}
+     */
     async addToWatchlist(movieId, authenticated) {
 
       let movieId_temp;
@@ -329,7 +366,14 @@ export default {
         }
       }
     },
-    async addToWatchedlist(movieId, authenticated) {
+
+    /**
+     * function to add movie to watchedList
+     * @param movieId
+     * @param authenticated
+     * @returns {Promise<void>}
+     */
+    async addToWatchedList(movieId, authenticated) {
       let movieId_temp;
       movieId_temp = movieId
       if (!authenticated) {
@@ -364,6 +408,11 @@ export default {
       }
     },
 
+    /**
+     * function to check if movie is in Watchlist
+     * @param movieId
+     * @returns {Promise<boolean>} isInWatchList
+     */
     async checkIfInWatchList(movieId) {
       const {currentUser} = this
       let alreadyIncluded;
@@ -382,6 +431,12 @@ export default {
 
     },
 
+
+    /**
+     * function to check if movie is in WatchedList
+     * @param movieId
+     * @returns {Promise<boolean>} isInWatchedList
+     */
     async checkIfInWatchedList(movieId) {
       const {currentUser} = this
       let alreadyIncluded;
@@ -402,6 +457,12 @@ export default {
       return !!alreadyIncluded;
     },
 
+    /**
+     * function to delete movie form watchList
+     * @param movieId
+     * @param authenticated
+     * @returns {Promise<void>}
+     */
     async deleteFromWatchList(movieId, authenticated) {
       if (!authenticated) {
         this.$q.notify({
@@ -431,6 +492,12 @@ export default {
       }
     },
 
+    /**
+     * function to delete movie from watchedList
+     * @param movieId
+     * @param authenticated
+     * @returns {Promise<void>}
+     */
     async deleteFromWatchedList(movieId, authenticated) {
       if (!authenticated) {
         this.$q.notify({

@@ -87,17 +87,10 @@ import {QSpinnerGears} from 'quasar'
 
 export default {
   name: 'Auth',
-  computed: {
-    getAuthType() {
-      return this.isRegistration ? 'Account erstellen' : 'Login'
-    },
-    isRegistration() {
-      return this.$route.name === 'Register'
-    },
-    routeAuthentication() {
-      return this.isRegistration ? '/auth/login' : '/auth/register'
-    }
-  },
+  /**
+   *
+   * @returns {{password: null, email: null, isPwd: boolean, passwordMatch: null}}
+   */
   data() {
     return {
       email: null,
@@ -106,8 +99,37 @@ export default {
       passwordMatch: null
     }
   },
+
+
+  computed: {
+    /**
+     *
+     * @returns {string} loginType
+     */
+    getAuthType() {
+      return this.isRegistration ? 'Account erstellen' : 'Login'
+    },
+    /**
+     *
+     * @returns {boolean} isRegister
+     */
+    isRegistration() {
+      return this.$route.name === 'Register'
+    },
+    /**
+     *
+     * @returns {string} route
+     */
+    routeAuthentication() {
+      return this.isRegistration ? '/auth/login' : '/auth/register'
+    }
+  },
+
   methods: {
     ...mapActions('auth', ['createNewUser', 'loginUser']),
+    /**
+     * function that logs the user in
+     */
     onSubmit() {
       const {email, password} = this
       this.$refs.emailAuthenticationForm.validate()

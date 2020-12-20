@@ -12,6 +12,10 @@ import {mapActions, mapGetters, mapMutations} from 'vuex'
 
 export default {
   name: 'UserSettings',
+  /**
+   *
+   * @returns {{fullName: string | {description: string, type: string} | string, email: *}}
+   */
   data() {
     const state = this.$store.state.user.currentUser
     return {
@@ -21,6 +25,10 @@ export default {
   },
   computed: {
     ...mapGetters('user', ['currentUser']),
+    /**
+     *
+     * @returns {{id: *}} currentUserID
+     */
     meta() {
       return {
         id: this.currentUser.id,
@@ -30,6 +38,10 @@ export default {
   methods: {
     ...mapActions('user', ['updateUserData']),
     ...mapMutations('user', ['setEditUserDialog']),
+    /**
+     * Saves User-Data to FB
+     * @returns {Promise<void>}
+     */
     async saveUserData() {
       const {currentUser} = this
       let email_temp;

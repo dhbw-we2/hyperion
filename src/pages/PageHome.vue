@@ -39,11 +39,25 @@
 <script>
 
 export default {
-  // actually displays the movie cover
+  name: 'PageHome',
+  data() {
+    return {
+      movieArray: [],
+      current: 1
+    }
+  },
+  /**
+   * load movies when page is loaded
+   */
   mounted() {
     this.loadData()
   },
   watch: {
+    /**
+     * reload movie when route changes
+     * @param to
+     * @param from
+     */
     $route(to, from) {
       this.show = false;
       this.loadData()
@@ -52,15 +66,13 @@ export default {
       this.loadData()
     },
   },
-  name: 'PageHome',
-  data: function () {
-    return {
-      movieArray: [],
-      current: 1
-    }
-  },
+
+
 
   methods: {
+    /**
+     * loads movieData from MovieDB
+     */
     loadData() {
       let currentPage
       currentPage = this.current
@@ -84,32 +96,14 @@ export default {
         })
     },
 
+    /**
+     * search movie by ID on Moviepage
+     * @param movieId
+     */
     searchById(movieId) {
       this.$router.replace({name: "searchidresult", params: {idsearch: movieId}}).catch(err => {
       })
     },
-
-    handleBlur(event) {
-      const el = event.target
-      let config;
-      config = require('../../config.json')
-      let api_base_url;
-      api_base_url = 'https://api.themoviedb.org/3/movie/'
-      let api_key;
-      api_key = config.api_key_movie
-      let movie_id;
-      movie_id = el.id
-      this.$axios.get('${api_base_url}${movie_id}?api_key=${api_key}&language=de')
-        .then((response) => {
-          this.data = response.data.results
-
-          return this.data.title
-        })
-        .catch(() => {
-
-        })
-
-    }
   }
 
 }

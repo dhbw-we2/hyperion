@@ -50,7 +50,8 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "Watchedlist",
-  data: function () {
+
+  data() {
     const state = this.$store.state.user.currentUser
     return {
       state,
@@ -58,12 +59,20 @@ export default {
       fullMovieArray: [],
     }
   },
+  /**
+   * calls function to get WatchedList movies on page load
+   * @returns {Promise<void>}
+   */
   async mounted() {
     await this.get()
-    this.getEveryWatchListMovie()
+    this.getEveryWatchedListMovie()
   },
   computed: {
     ...mapGetters('user', ['currentUser']),
+    /**
+     *
+     * @returns {{id: *}} currentUserID
+     */
     meta() {
       return {
         id: this.currentUser.id,
@@ -73,11 +82,19 @@ export default {
   methods: {
     ...mapActions('user', ['getWholeWatchedList']),
 
+    /**
+     * open MoviePage with current movieID
+     * @param givenId
+     */
     searchPosterClick(givenId) {
       this.$router.replace({name: "searchidresult", params: {idsearch: givenId}}).catch(err => {
       })
     },
 
+    /**
+     *
+     * @returns {Promise<void>} watchedListIDs
+     */
     async get() {
       const {currentUser} = this
       try {
@@ -96,11 +113,18 @@ export default {
       }
     },
 
-    getEveryWatchListMovie() {
+    /**
+     * foreach watchedlistItem call API function
+     */
+    getEveryWatchedListMovie() {
       this.movieIDs.forEach(element => this.loadData(element))
 
     },
 
+    /**
+     * get movieData from MovieDB
+     * @param searchid
+     */
     loadData(searchid) {
       if (searchid == null) {
         return

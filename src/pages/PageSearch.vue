@@ -48,31 +48,47 @@
 
 <script>
 export default {
-  name: "search",
+  name: "Search",
+  data() {
+    return {
+      movieArray: []
+    }
+  },
+  /**
+   * load movies by searchID from route
+   */
   mounted() {
     this.search = this.$route.params.search;
     this.loadData(this.search)
   },
   watch: {
+    /**
+     * reload movieData when route changes
+     * @param to
+     * @param from
+     */
     $route(to, from) {
       this.show = false;
       this.search = this.$route.params.search;
       this.loadData(this.search)
     }
   },
-  data: function () {
-    return {
-      movieArray: []
-    }
-  },
 
 
   methods: {
+    /**
+     * load Moviepage with the current movieID
+     * @param givenId
+     */
     searchPosterClick(givenId) {
       this.$router.replace({name: "searchidresult", params: {idsearch: givenId}}).catch(err => {
       })
     },
 
+    /**
+     * load searchData from MovieDB
+     * @param searchtext
+     */
     loadData(searchtext) {
       if (searchtext == null) {
         return
