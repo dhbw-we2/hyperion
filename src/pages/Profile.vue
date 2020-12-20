@@ -1,7 +1,7 @@
 <template>
   <q-page  flex-center>
-    <q-input v-model="fullName" label="Username" :placeholder="currentUser.fullName" hint="With placeholder" />
-    <q-input v-model="email" label="Mail" :placeholder="currentUser.email" hint="With placeholder" readonly/>
+    <q-input v-model="fullName" label="Username" :placeholder="currentUser.fullName" />
+    <q-input v-model="email" label="Mail" :placeholder="currentUser.email" readonly/>
     <q-btn color="primary" label="Profil ändern!" @click="saveUserData" />
   </q-page>
 

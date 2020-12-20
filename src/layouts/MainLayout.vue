@@ -22,6 +22,21 @@
           </q-input>
         </div>
 
+          <div class="q-pa-md q-gutter-sm">
+            <q-btn to="/profile">
+              <q-avatar
+                v-for="size in ['xm']"
+                :key="size"
+                :size="size"
+                color="primary"
+                text-color="white"
+                icon="person" />
+            </q-btn>
+          </div>
+
+<!--        <q-btn icon-right="fas fa-profile"-->
+<!--               label="Profile" to="/profile" @click="Profile"/>-->
+
         <q-btn v-if="!$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
                label="Login" to="/auth/login"/>
         <q-btn v-if="$store.state.auth.isAuthenticated" dense color="secondary" icon-right="fas fa-sign-in-alt"
