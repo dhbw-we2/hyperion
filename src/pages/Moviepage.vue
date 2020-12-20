@@ -1,5 +1,5 @@
-<template xmlns:Altersfreigabe="http://www.w3.org/1999/xhtml">
-  <q-page class="flex-center bg-searcher">
+<template>
+  <q-page class="flex-center">
 
 
 
@@ -11,16 +11,16 @@
       <div class="col">
         <h3>{{ extMovieArray.title }}</h3>
 
-        <iframe width="60%" height="400px" :src="videoEmbedLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <p></p>
+        <!--suppress HtmlDeprecatedAttribute -->
+        <iframe width="560" height="315" :src="videoEmbedLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <p></p>
       </div>
 
       <div class="col">
         <q-img
           :src="'https://image.tmdb.org/t/p/w200' + extMovieArray.poster_path"
           alt="poster"
-          width="30%"
-          height="30%"
-
+          width="50%"
+          height="40%"
         >
         </q-img>
       </div>
@@ -54,10 +54,11 @@
 
       <div class="col">
         <p></p>
-        <q-btn v-if="inWatchList" outline color="primary" label="Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
-        <q-btn v-else outline color="primary" label="Lösche aus Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
+        <q-btn v-if="!inWatchList" outline color="primary" label="Watch-List" @click="addToWatchlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit" :loading="addingToWatchList"/>
+        <q-btn v-else outline color="primary" label="Lösche aus Watch-List" @click="deleteFromWatchList(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
         <p></p>
-        <q-btn outline color="primary" label="Watched-List" @click="addToWatchedlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
+        <q-btn v-if="!inWatchedList" outline color="primary" label="Watched-List" @click="addToWatchedlist(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit" :loading="addingToWatchedList"/>
+        <q-btn v-else outline color="primary" label="Lösche aus Watched-List" @click="deleteFromWatchedList(extMovieArray.id, $store.state.auth.isAuthenticated)" type="submit"/>
       </div>
     </div>
 
@@ -69,7 +70,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters} from 'vuex'
+import {checkIfMovieIsInWatchList} from "src/store/user/actions";
 
 export default {
   name: "Moviepage",
@@ -79,19 +81,23 @@ export default {
     return {
       extMovieArray: [],
       videoEmbedLink: "",
-      inWatchList: false
+      inWatchList: false,
+      addingToWatchList: false,
+      inWatchedList: false,
+      addingToWatchedList: false,
+      state
     }
   },
 
   async created() {
-    console.log(this.extMovieArray)
-    console.log("Funktioniert es:  " + await this.checkIfInWatchList(671583))
+    this.idsearch = this.$route.params.idsearch
+    this.inWatchList = await this.checkIfInWatchList(this.idsearch)
+    this.inWatchedList = await this.checkIfInWatchedList(this.idsearch)
   },
-  async mounted() {
+  mounted() {
 
     this.idsearch = this.$route.params.idsearch;
-    this.data = await  this.loadData(this.idsearch)
-    console.log(this.data)
+    this.loadData(this.idsearch)
   },
 
   watch: {
@@ -128,7 +134,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem', 'checkIfMovieIsInWatchList', 'checkIfMovieIsInWatchedList']),
+    ...mapActions('user', ['updateUserAddWatchlistItem', 'updateUserAddWatchedlistItem', 'checkIfMovieIsInWatchList', 'checkIfMovieIsInWatchedList', 'updateUserDeleteWatchlistItem', 'updateUserDeleteWatchedlistItem']),
     loadData(searchid) {
       if (searchid == null){
         return
@@ -166,30 +172,9 @@ export default {
         })
     },
     async addToWatchlist(movieId, authenticated) {
-      const { currentUser} = this
-      let alreadyIncluded;
+
       let movieId_temp;
       movieId_temp = movieId
-      try {
-        alreadyIncluded = await this.checkIfMovieIsInWatchList({
-          id: currentUser.id,
-          movieId: movieId_temp
-        })
-      } catch (err) {
-        this.$q.notify({
-          message: `Fehler bei Testfunktion: ${err}`,
-          color: 'negative'
-        })
-      } finally {
-        if (alreadyIncluded) {
-          this.$q.notify({
-            message: `Der Film ist bereits in deiner Watchlist!`,
-            color: 'negative'
-          })
-          return
-        }
-        this.$q.loading.hide()
-      }
       if(!authenticated) {
         this.$q.notify({
           type: 'negative',
@@ -201,10 +186,16 @@ export default {
         let movieId_temp;
         movieId_temp = movieId
         try {
+          this.addingToWatchList = true
           await this.updateUserAddWatchlistItem({
             id: currentUser.id,
             movieId: movieId_temp
           })
+          this.$q.notify({
+            type: 'positive',
+            message: "Der Film wurde zu deiner Watch-List hinzugefügt!"
+          })
+          this.inWatchList = true
         } catch (err) {
           this.$q.notify({
             message: `Der Film konnte leider nicht zur Watchlist hinzugefügt werden: ${err}`,
@@ -212,38 +203,15 @@ export default {
           })
         } finally {
           this.$q.loading.hide()
-          this.$q.notify({
-            type: 'positive',
-            message: "Der Film wurde zu deiner Watch-List hinzugefügt!"
-          })
+          this.addingToWatchList = false
+
+
         }
       }
     },
     async addToWatchedlist(movieId, authenticated) {
-      const { currentUser} = this
-      let alreadyIncluded;
       let movieId_temp;
       movieId_temp = movieId
-      try {
-        alreadyIncluded = await this.checkIfMovieIsInWatchedList({
-          id: currentUser.id,
-          movieId: movieId_temp
-        })
-      } catch (err) {
-        this.$q.notify({
-          message: `Fehler bei Testfunktion: ${err}`,
-          color: 'negative'
-        })
-      } finally {
-        if (alreadyIncluded) {
-          this.$q.notify({
-            message: `Der Film ist bereits in deiner Watched-List!`,
-            color: 'negative'
-          })
-          return
-        }
-        this.$q.loading.hide()
-      }
       if(!authenticated) {
         this.$q.notify({
           type: 'negative',
@@ -255,10 +223,12 @@ export default {
         let movieId_temp;
         movieId_temp = movieId
         try {
+          this.addingToWatchedList = true
           await this.updateUserAddWatchedlistItem({
             id: currentUser.id,
             movieId: movieId_temp
           })
+          this.inWatchedList = true
         } catch (err) {
           this.$q.notify({
             message: `Der Film konnte leider nicht zur Watchlist hinzugefügt werden: ${err}`,
@@ -266,6 +236,7 @@ export default {
           })
         } finally {
           this.$q.loading.hide()
+          this.addingToWatchedList = false
           this.$q.notify({
             type: 'positive',
             message: "Der Film wurde zu deiner Watched-List hinzugefügt!"
@@ -285,27 +256,90 @@ export default {
           movieId: movieId_temp
         })
       } catch (err) {
-        this.$q.notify({
-          message: `Fehler bei Testfunktion: ${err}`,
-          color: 'negative'
-        })
       } finally {
         this.$q.loading.hide()
-        if (alreadyIncluded) {
-          this.$q.notify({
-            message: `Der Film ist bereits in deiner Watchlist!`,
-            color: 'negative'
-          })
-          return true
-        }
-        else {
-          return false
-        }
+      }
+      return !!alreadyIncluded;
+
+    },
+
+    async checkIfInWatchedList(movieId) {
+      const { currentUser} = this
+      let alreadyIncluded;
+      let movieId_temp;
+      movieId_temp = movieId
+      try {
+        alreadyIncluded = await this.checkIfMovieIsInWatchedList({
+          id: currentUser.id,
+          movieId: movieId_temp
+        })
+      } catch (err) {
+
+      } finally {
+        this.$q.loading.hide()
+
 
       }
+      return !!alreadyIncluded;
+    },
+
+    async deleteFromWatchList(movieId, authenticated) {
+      if (!authenticated) {
+        this.$q.notify({
+          type: 'negative',
+          message: "Für diese Aktion musst du eingeloggt sein!"
+        })
+      } else {
+        const {currentUser} = this
+        let movieId_temp
+        movieId_temp = movieId
+        try {
+          await this.updateUserDeleteWatchlistItem({
+            id: currentUser.id,
+            movieId: movieId_temp
+          })
+          this.$q.notify({
+            type: 'positive',
+            message: "Der Film wurde aus deiner Watch-List gelöscht!"
+          })
+          this.inWatchList = false
+        } catch (err) {
+          this.$q.notify({
+            message: `Fehler beim Löschen: ${err}`,
+            color: 'negative'
+          })
+        }
+      }
+    },
+
+    async deleteFromWatchedList(movieId, authenticated) {
+      if (!authenticated) {
+        this.$q.notify({
+          type: 'negative',
+          message: "Für diese Aktion musst du eingeloggt sein!"
+        })
+      } else {
+        const {currentUser} = this
+        let movieId_temp
+        movieId_temp = movieId
+        try {
+          await this.updateUserDeleteWatchedlistItem({
+            id: currentUser.id,
+            movieId: movieId_temp
+          })
+          this.$q.notify({
+            type: 'positive',
+            message: "Der Film wurde aus deiner Watched-List gelöscht!"
+          })
+          this.inWatchedList = false
+        } catch (err) {
+          this.$q.notify({
+            message: `Fehler bei Löschen: ${err}`,
+            color: 'negative'
+          })
+        }
+      }
     }
-
-
   }
 }
 </script>

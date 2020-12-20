@@ -5,7 +5,7 @@
       <q-toolbar>
         <q-toolbar-title>
             <q-avatar>
-              <img @click="$router.push({ path: '../home' })"
+              <img @click="$router.push({ path: '/' })"
                    class="hover"
                    src="../assets/icon_1.png" alt="filmtracker"
               >
@@ -15,7 +15,7 @@
         </q-toolbar-title>
 
         <div class="absolute-center" style="min-width: 35%">
-          <q-input dark v-model="search" filled type="search" color="white">
+          <q-input dark v-model="search" filled type="search" color="white" @keydown.enter.prevent="searchBtnClick">
             <template v-slot:after>
               <q-btn round dense flat icon="search" @click="searchBtnClick" type="submit"/>
             </template>
@@ -29,9 +29,10 @@
       </q-toolbar>
 
       <q-tabs align="left">
-        <q-route-tab to="/home" label="Startseite"/>
+        <q-route-tab to="/" label="Startseite"/>
         <q-tab label="Suche"/>
-        <q-route-tab to="/trackerlist" label="Eigene Liste"/>
+        <q-route-tab to="/watchlist" label="Watch-List"/>
+        <q-route-tab to="/watchedlist" label="Watched-List"/>
       </q-tabs>
     </q-header>
 
@@ -48,9 +49,9 @@ import {mapActions} from "vuex"
 
 export default {
   data() {
-    search: ''
     return {
-      right: false
+      right: false,
+      search: ''
     }
   },
   methods: {
@@ -74,7 +75,7 @@ export default {
           message: `${err}`,
         })
       }
-    }
+    },
   }
 }
 </script>
