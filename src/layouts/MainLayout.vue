@@ -116,6 +116,10 @@
 import {mapActions} from "vuex"
 
 export default {
+  /**
+   *
+   * @returns {{search: string, right: boolean}}
+   */
   data() {
     return {
       right: false,
@@ -124,12 +128,21 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['logoutUser']),
+
+    /**
+     * route to PageSearch with searchtext in route
+     */
     searchBtnClick() {
       let searchtext;
       searchtext = this.search;
       this.$router.replace({name: "searchresult", params: {search: searchtext}}).catch(err => {
       })
     },
+
+    /**
+     * logout user
+     * @returns {Promise<void>}
+     */
     async logout() {
       try {
         await this.logoutUser()
