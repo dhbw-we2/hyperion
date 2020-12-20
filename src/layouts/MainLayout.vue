@@ -10,7 +10,7 @@
                    src="../assets/icon_1.png" alt="filmtracker"
               >
             </q-avatar>
-          Filmtracker
+          filmtracker
 
         </q-toolbar-title>
 
