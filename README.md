@@ -15,7 +15,7 @@ Verbindung zu den Filminformationen ist der große Vorteil und damit der USP die
 
 Von Team Hyperion
 
-#Buildprozess
+# Buildprozess
 1. Anlegen einer config.json Datei im Root Directory
 2. `npm install`
 3. `npm run dev`
