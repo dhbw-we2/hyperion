@@ -10,7 +10,7 @@
           @click="searchPosterClick(title.id)"
         >
 
-          <q-card class="my-card">
+          <q-card>
             <q-img :src="'https://image.tmdb.org/t/p/w200' + title.poster_path"
                    height="100%">
               <div class="absolute-bottom">
@@ -28,13 +28,6 @@
   </q-page>
 
 </template>
-
-<style lang="sass" scoped>
-.my-card
-  margin: 5px 1% 5px 1%
-  width: 100%
-  height: 100%
-</style>
 
 <script>
 export default {
