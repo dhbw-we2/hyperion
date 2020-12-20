@@ -1,6 +1,6 @@
 <template>
-  <q-page class="flex-center">
-    <div class="q-pa-md q-mt-lg q-gutter-md row justify-center items-start" v-model="extMovieArray">
+  <q-page class="bg-moviepage flex-center">
+    <div class="q-pt-xl  row justify-center items-start" v-model="extMovieArray">
       <q-card class="my-card" inline flat bordered>
         <q-card-section>
           <q-item>
@@ -8,7 +8,7 @@
               <q-item-label caption>
                 Titel
               </q-item-label>
-              <q-item-label class="text-weight-bolder">{{ extMovieArray.title }}</q-item-label>
+              <q-item-label style="font-size: 50px" class="text-weight-bolder">{{ extMovieArray.title }}</q-item-label>
 
             </q-item-section>
           </q-item>
@@ -84,7 +84,7 @@
           <q-space />
 
           <q-btn v-if="trailerExists" label="Trailer anzeigen"
-            color="grey"
+            color="black"
             round
             flat
             dense
@@ -106,13 +106,17 @@
       </q-card>
     </div>
   </q-page>
+
 </template>
 
 <style lang="sass" scoped>
 .my-card
   min-width: 70%
   max-width: 80%
-  background-color: rgba(201, 76, 76, 0.3)
+  background-color: rgba(90, 168, 220, 0.79)
+  border-style: solid
+  border-color: black
+  border-width: 2px
 
 .fluidMedia
   position: relative
